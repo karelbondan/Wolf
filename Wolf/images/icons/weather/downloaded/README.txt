@@ -1,0 +1,1 @@
+All files in this folder are downloaded from the website https://openweathermap.org/weather-conditions as part of the API call
