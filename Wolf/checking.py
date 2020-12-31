@@ -47,18 +47,22 @@ international_operands = ['plus', 'divided', 'times', 'minus', '+', '-', '/', '*
 preposition = ['in', 'on', 'at']
 misc = ['a', 'the', 'define', 'what', 'is', 'wikipedia', 'wiki']
 predictions = ['search', 'for', 'what', 'is', 'define', 'who', 'in', 'on', 'at', 'google', 'bing', 'yahoo', 'youtube',
-               'open', 'and', 'duckduckgo', 'play']
+               'open', 'and', 'duckduckgo', 'play', 'stack', 'overflow', 'stackoverflow', 'reddit']
 prediction_2 = ['open']
-yt_case = ['youtube', 'yt', 'music',]
-websites = ['youtube', 'yt', 'music', 'bing', 'google', 'yahoo', 'duckduckgo']
+yt_case = ['youtube', 'yt', 'music', 'stack', 'overflow', 'stackoverflow', 'reddit']
+websites = ['youtube', 'yt', 'music', 'stack', 'overflow', 'stackoverflow', 'reddit', 'bing', 'google', 'yahoo',
+            'duckduckgo']
 searches = {'youtube': {'music': 'https://music.youtube.com/search?q=', 'youtube': 'https://www.youtube.com/search?q='},
             'bing': 'https://www.bing.com/search?q=', 'yahoo': 'https://search.yahoo.com/search?q=',
-            'google': 'https://www.google.com/search?q=', 'duckduckgo': 'https://duckduckgo.com/?q='}
+            'google': 'https://www.google.com/search?q=', 'duckduckgo': 'https://duckduckgo.com/?q=',
+            'stackoverflow':'https://www.stackoverflow.com/search?q=', 'reddit':'https://www.reddit.com/search/?q='}
 
 after_search = {'youtube': 'Enjoy watching!', 'youtube music': 'Enjoy listening to the rythm!',
                 'google': 'Here are the results from Google.', 'bing': 'Here are the results from Bing.',
                 'yahoo': 'Here are the results from Yahoo.',
-                'duckduckgo': 'Here are the results from DuckDuckGo.'}
+                'duckduckgo': 'Here are the results from DuckDuckGo.',
+                'stackoverflow': 'Here are the result from Stack Overflow.',
+                'reddit':'Here are the result from Reddit.'}
 
 # dictionary containing the path of the commonly used applications on Windows.
 applications = {'word': "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
