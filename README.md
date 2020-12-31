@@ -13,7 +13,7 @@ their preffered background color, and their profile picture.
 
 1. Define something
 2. Give short description of known people
-3. Make lists and notes
+3. Make a note
 4. Open user-installed apps
 5. Search the web (multiple search engines)
 6. Telling current weather of a city
