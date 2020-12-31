@@ -72,7 +72,9 @@ applications = {'word': "C:\\Program Files\\Microsoft Office\\root\\Office16\\WI
                 'excel': "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
                 'photoshop': "C:\\Program Files\\Adobe\\Adobe Photoshop CC 2018\\Photoshop.exe",
                 'pycharm': "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2020.2.3\\bin\\pycharm64.exe",
-                'notepad': 'C:\\Windows\\system32\\notepad.exe'}
+                'notepad': 'C:\\Windows\\system32\\notepad.exe',
+                'edge': "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+                'explorer': 'C:\\Windows\\explorer.exe'}
 
 # the sentence the assistant will say after it has found a result.
 final_words = ['You can read more on the results I\'ve shown', 'Here are the results from the web',
