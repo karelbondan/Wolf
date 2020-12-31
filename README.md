@@ -18,7 +18,7 @@ their preffered background color, and their profile picture.
 5. Search the web (multiple search engines)
 6. Telling current weather of a city
 7. Telling jokes
-8. Voice commands
+8. Voice commands (WIP)
 9. User interface
 10. Play video on YouTube & music on YT Music based on user search
 
