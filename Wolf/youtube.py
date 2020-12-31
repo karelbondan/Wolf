@@ -28,13 +28,13 @@ def playonyt(topic):
 
     # if not result: return 'no videos found'.
     if lst[count - 5] == "/results":
-        return 'sorry, I didn\'t find any video that matches your search result.'
+        return None, 'sorry, I didn\'t find any video that matches your search result.'
 
     # playing the video
     print("Videos found, opening most recent video")
     webbrowser.open("https://www.youtube.com" + lst[count - 5])
 
-    return f'Playing a video based on your search: {topic}'
+    return None, f'Playing a video based on your search: {topic}'
 
 
 # this function below is the one I defined myself, I used Ankit's (PyWhatKit module developer) technique
@@ -74,7 +74,7 @@ def play_yt_music(usrinput):
 
     # if len not 11 return link not found
     if len(unfiltered_contents[counter - 17]) != 11:
-        return f'No music found. Please retry your search'
+        return None, f'No music found. Please retry your search'
     else:
         pass
 
@@ -89,7 +89,7 @@ def play_yt_music(usrinput):
     # playing the music
     webbrowser.open(f'https://music.youtube.com/watch?v={unfiltered_contents[counter - 17]}')
 
-    return f'Playing a music based on your search: {usrinput}'
+    return None, f'Playing a music based on your search: {usrinput}'
 
 
 # debugging
