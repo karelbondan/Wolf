@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'assistant_finalRkEPLf.ui'
+## Form generated from reading UI file 'assistant_finalxFSrUV.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -124,7 +124,7 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {	\n"
 "	background-color: rgba(30, 30, 30, 80);\n"
-"	border: 2px solid rgb(240,240,240);\n"
+"	border: 3px solid rgb(240,240,240);\n"
 "}\n"
 "QPushButton:pressed {	\n"
 "	background-color: rgba(30, 30, 30, 130);\n"
@@ -181,7 +181,7 @@ class Ui_MainWindow(object):
 "border:  2px solid rgb(255, 255, 255);\n"
 "")
         icon3 = QIcon()
-        icon3.addFile(u"C:/Wolf/images/icons/placeholder.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon3.addFile(u"../../../../../../PycharmProjects/virtualssignmentproject-testings/arsen.jpg-resized.jpg", QSize(), QIcon.Normal, QIcon.Off)
         self.button_profile.setIcon(icon3)
         self.button_profile.setIconSize(QSize(60, 60))
         self.button_profile.setCheckable(False)
@@ -217,7 +217,7 @@ class Ui_MainWindow(object):
         self.weather_icon.setObjectName(u"weather_icon")
         self.weather_icon.setGeometry(QRect(260, 290, 121, 100))
         self.weather_icon.setStyleSheet(u"color: rgb(255, 255, 255);")
-        self.weather_icon.setPixmap(QPixmap(u"C:/Wolf/images/icons/weather/04d.png"))
+        self.weather_icon.setPixmap(QPixmap(u"../../../../../../PycharmProjects/pythonProjecttest/images/weather/04d.png"))
         self.weather_icon.setAlignment(Qt.AlignCenter)
         self.high_low = QLabel(self.weather)
         self.high_low.setObjectName(u"high_low")
@@ -272,7 +272,7 @@ class Ui_MainWindow(object):
         self.user_input.setObjectName(u"user_input")
         self.user_input.setGeometry(QRect(320, 10, 441, 191))
         self.user_input.setStyleSheet(u"color: rgb(255, 255, 255);\n"
-"font: 25 25pt \"SF Pro Display\";")
+"font: 25 20pt \"SF Pro Display\";")
         self.user_input.setTextFormat(Qt.AutoText)
         self.user_input.setAlignment(Qt.AlignBottom|Qt.AlignRight|Qt.AlignTrailing)
         self.user_input.setWordWrap(True)
@@ -280,7 +280,7 @@ class Ui_MainWindow(object):
         self.result.setObjectName(u"result")
         self.result.setGeometry(QRect(130, 260, 531, 261))
         self.result.setStyleSheet(u"color: rgb(255, 255, 255);\n"
-"font: 0 25pt \"SF Pro Display\";")
+"font: 0 20pt \"SF Pro Display\";")
         self.result.setTextFormat(Qt.AutoText)
         self.result.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.result.setWordWrap(True)
@@ -289,7 +289,7 @@ class Ui_MainWindow(object):
         self.init.setGeometry(QRect(120, 180, 671, 181))
         self.init.setStyleSheet(u"color: rgb(255, 255, 255);\n"
 "color: rgba(255, 255, 255, 100);\n"
-"font: 0 40pt \"SF Pro Display\";")
+"font: 0 30pt \"SF Pro Display\";")
         self.init.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_2.addWidget(self.frame_content)
@@ -313,10 +313,12 @@ class Ui_MainWindow(object):
 "	font: 87 12pt \"SF Pro Display\";\n"
 "}\n"
 "QLineEdit:hover {\n"
-"	border: 2px solid rgb(240,240,240);\n"
+"	border: 3px solid rgb(240,240,240);\n"
+"	padding: 14px;\n"
 "}\n"
 "QLineEdit:focus {\n"
-"	border: 2px solid rgb(255, 255, 255);	\n"
+"	border: 3px solid rgb(255, 255, 255);\n"
+"	padding: 14px;\n"
 "	color: rgb(255, 255, 255);\n"
 "}")
         self.button_speak = QPushButton(self.frame_command)
@@ -332,7 +334,7 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {	\n"
 "	background-color: rgba(30, 30, 30, 80);\n"
-"	border: 2px solid rgb(240,240,240);\n"
+"	border: 3px solid rgb(240,240,240);\n"
 "}\n"
 "QPushButton:pressed {	\n"
 "	background-color: rgba(30, 30, 30, 130);\n"
@@ -356,7 +358,7 @@ class Ui_MainWindow(object):
 "}\n"
 "QPushButton:hover {	\n"
 "	background-color: rgba(30, 30, 30, 80);\n"
-"	border: 2px solid rgb(240,240,240);\n"
+"	border: 3px solid rgb(240,240,240);\n"
 "}\n"
 "QPushButton:pressed {	\n"
 "	background-color: rgba(30, 30, 30, 130);\n"
@@ -404,7 +406,7 @@ class Ui_MainWindow(object):
         self.profile_change.setMinimumSize(QSize(300, 300))
         self.profile_change.setMaximumSize(QSize(300, 300))
         self.profile_change.setStyleSheet(u"border-radius: 150px;\n"
-"border:  2px solid rgb(255, 255, 255);")
+"border:  0px solid rgb(255, 255, 255);")
         icon6 = QIcon()
         icon6.addFile(u"C:/Wolf/images/temp/resized_karel.png", QSize(), QIcon.Normal, QIcon.Off)
         self.profile_change.setIcon(icon6)
@@ -592,7 +594,7 @@ class Ui_MainWindow(object):
         self.button_color_grayscale.setMinimumSize(QSize(50, 50))
         self.button_color_grayscale.setMaximumSize(QSize(50, 50))
         icon25 = QIcon()
-        icon25.addFile(u"C:/Wolf/images/icons/color_grayscale.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon25.addFile(u"../../../../../../PycharmProjects/pythonProjecttest/images/icons/color_grayscale.png", QSize(), QIcon.Normal, QIcon.Off)
         self.button_color_grayscale.setIcon(icon25)
         self.button_color_grayscale.setIconSize(QSize(50, 50))
         self.arrow_upright = QLabel(self.frame_settings)
@@ -684,10 +686,10 @@ class Ui_MainWindow(object):
         self.separator_3.setStyleSheet(u"font: 25 26pt \"SF Pro Display\";\n"
 "color: rgb(255, 255, 255);")
         self.separator_3.setAlignment(Qt.AlignCenter)
-        self.button_addapp_tutorial = QPushButton(self.frame_settings)
-        self.button_addapp_tutorial.setObjectName(u"button_addapp_tutorial")
-        self.button_addapp_tutorial.setGeometry(QRect(610, 463, 75, 40))
-        self.button_addapp_tutorial.setStyleSheet(u"QPushButton {	\n"
+        self.button_documentation = QPushButton(self.frame_settings)
+        self.button_documentation.setObjectName(u"button_documentation")
+        self.button_documentation.setGeometry(QRect(670, 463, 111, 40))
+        self.button_documentation.setStyleSheet(u"QPushButton {	\n"
 "	border: 1px solid rgb(125, 125, 125);\n"
 "	border-radius: 20px;\n"
 "	background-color: rgba(30, 30, 30, 70);\n"
@@ -702,39 +704,15 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgba(30, 30, 30, 130);\n"
 "	border: 2px solid rgb(255,255,255);\n"
-"	color: rgb(35, 35, 35);\n"
+"	color: rgb(255,255,255);\n"
 "}")
-        self.button_addapp_exec = QPushButton(self.frame_settings)
-        self.button_addapp_exec.setObjectName(u"button_addapp_exec")
-        self.button_addapp_exec.setGeometry(QRect(710, 463, 75, 40))
-        self.button_addapp_exec.setStyleSheet(u"QPushButton {	\n"
-"	border: 1px solid rgb(125, 125, 125);\n"
-"	border-radius: 20px;\n"
-"	background-color: rgba(30, 30, 30, 70);\n"
-"	border: 1px solid rgb(255,255,255);\n"
-"	color: rgb(235, 235, 235);\n"
-"	font: 25 10pt \"SF Pro Display\";\n"
-"}\n"
-"QPushButton:hover {	\n"
-"	background-color: rgba(30, 30, 30, 80);\n"
-"	border: 2px solid rgb(240,240,240);\n"
-"}\n"
-"QPushButton:pressed {	\n"
-"	background-color: rgba(30, 30, 30, 130);\n"
-"	border: 2px solid rgb(255,255,255);\n"
-"	color: rgb(35, 35, 35);\n"
-"}")
-        self.arrow_serongkiri = QLabel(self.frame_settings)
-        self.arrow_serongkiri.setObjectName(u"arrow_serongkiri")
-        self.arrow_serongkiri.setGeometry(QRect(640, 510, 51, 41))
-        self.arrow_serongkiri.setPixmap(QPixmap(u"C:/Wolf/images/icons/arrow_up_serongkiri.png"))
         self.arrow_serongkanan = QLabel(self.frame_settings)
         self.arrow_serongkanan.setObjectName(u"arrow_serongkanan")
-        self.arrow_serongkanan.setGeometry(QRect(720, 510, 51, 41))
+        self.arrow_serongkanan.setGeometry(QRect(695, 520, 51, 41))
         self.arrow_serongkanan.setPixmap(QPixmap(u"C:/Wolf/images/icons/arrow_up_serongkanan.png"))
         self.tip_3_bottomright = QLabel(self.frame_settings)
         self.tip_3_bottomright.setObjectName(u"tip_3_bottomright")
-        self.tip_3_bottomright.setGeometry(QRect(600, 560, 220, 51))
+        self.tip_3_bottomright.setGeometry(QRect(605, 560, 220, 51))
         self.tip_3_bottomright.setStyleSheet(u"font: 25 16pt \"SF Pro Display\";\n"
 "font: 75 12pt \"Andy\";\n"
 "color: rgb(255, 255, 255);")
@@ -770,7 +748,7 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgba(30, 30, 30, 130);\n"
 "	border: 2px solid rgb(255,255,255);\n"
-"	color: rgb(35, 35, 35);\n"
+"	color: rgb(255,255,255);\n"
 "}")
         self.button_hide_tips = QPushButton(self.frame_settings)
         self.button_hide_tips.setObjectName(u"button_hide_tips")
@@ -790,7 +768,7 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {	\n"
 "	background-color: rgba(30, 30, 30, 130);\n"
 "	border: 2px solid rgb(255,255,255);\n"
-"	color: rgb(35, 35, 35);\n"
+"	color: rgb(255,255,255);\n"
 "}")
 
         self.verticalLayout_3.addWidget(self.frame_settings)
@@ -927,15 +905,13 @@ class Ui_MainWindow(object):
         self.button_edit_name.setText("")
         self.change_name.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Enter your name", None))
         self.button_confirm_changename.setText("")
-        self.addyourownapp.setText(QCoreApplication.translate("MainWindow", u"Add your own apps", None))
+        self.addyourownapp.setText(QCoreApplication.translate("MainWindow", u"Miscellaneous", None))
         self.separator_3.setText(QCoreApplication.translate("MainWindow", u"l", None))
-        self.button_addapp_tutorial.setText(QCoreApplication.translate("MainWindow", u"Tutorial", None))
-        self.button_addapp_exec.setText(QCoreApplication.translate("MainWindow", u"Add app", None))
-        self.arrow_serongkiri.setText("")
+        self.button_documentation.setText(QCoreApplication.translate("MainWindow", u"Documentation", None))
         self.arrow_serongkanan.setText("")
-        self.tip_3_bottomright.setText(QCoreApplication.translate("MainWindow", u"Click the left button to see the tutorial, or the right button to add your own apps", None))
+        self.tip_3_bottomright.setText(QCoreApplication.translate("MainWindow", u"Click this button to see the documentation of Wolf", None))
         self.arrow_upleft.setText("")
-        self.tip_4_buttomleft.setText(QCoreApplication.translate("MainWindow", u"Click this button to change your name. Wolf will call you by this name too", None))
+        self.tip_4_buttomleft.setText(QCoreApplication.translate("MainWindow", u"Click this button to change your name. Gonpachiro will call you by this name too", None))
         self.button_show_tips.setText(QCoreApplication.translate("MainWindow", u"Show tips", None))
         self.button_hide_tips.setText(QCoreApplication.translate("MainWindow", u"Hide tips", None))
         self.madeby.setText(QCoreApplication.translate("MainWindow", u"Made by", None))
