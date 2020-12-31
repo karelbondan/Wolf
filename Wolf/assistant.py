@@ -79,6 +79,8 @@ def basic_tasks(usr_input):
 
 
 def output(userinput):
+    rawinput = userinput
+
     try:
         # I separated the basic_tasks and the search function to ease the management of the codes
         # it was confusing as heck before I split them into their own respective functions.
@@ -114,6 +116,7 @@ def output(userinput):
 
         # splitting the input to make it easier to manage.
         userinput = userinput.split()
+        print(userinput)
 
         # checking whether the international_number keys is in userinput or not
         def check_input(userinput):
@@ -241,9 +244,6 @@ def output(userinput):
                 voice_output_calculator('Error')
                 return None, 'Sorry, your term did not bring up any result. Try simplifying the question.'
 
-        # elif 'make' in userinput and 'alarm' in userinput or 'new' in userinput and 'alarm' in userinput:
-        # print("This is an alarm test!")
-
         elif userinput[0] or userinput[1] or userinput[2] or userinput[-1] or userinput[-2] in num.predictions:
             search = ''
             web = 'google'
@@ -259,6 +259,9 @@ def output(userinput):
                 web = 'youtube'
                 if 'play' in userinput:
                     search_check = 'youtube'
+            elif 'stack' and 'overflow' in userinput or 'stackoverflow' in userinput:
+                browse = num.searches['stackoverflow']
+                web = 'stackoverflow'
             else:
                 for input in num.searches.keys():
                     if input in userinput:
@@ -271,12 +274,12 @@ def output(userinput):
             for content in num.yt_case:
                 if content in userinput:
                     userinput.remove(content)
-            for i in num.predictions:
-                if i in userinput:
+            for prediction in num.predictions:
+                if prediction in userinput:
                     if userinput[0] == 'is':
                         pass
                     else:
-                        userinput = list(filter((i).__ne__, userinput))
+                        userinput = list(filter((prediction).__ne__, userinput))
                 else:
                     pass
             for final_items in userinput:
@@ -351,7 +354,7 @@ def output(userinput):
         pass
 
 
-#"""
+"""
 time.sleep(1)
 while 1:
     input_temp = input('enter your question')
