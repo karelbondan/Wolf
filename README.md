@@ -37,7 +37,7 @@ on the user's locale language. The same bug goes for giving description of someo
 
 ### Important Note
 
-If someone somehow finds this and wants to clone this repo, Gonpachiro only works on Windows. If you met the first requirement
+If someone somehow finds this and wants to clone this repo, Wolf only works on Windows. If you met the first requirement
 (you're using Windows), please move or copy the 'Wolf' folder to the C:/ drive (the C:/ itself, don't put it on any folder). 
 This program was made on Windows 10 and uses file modifications, 
 so all the files and folders necessary for this program to run is referenced to Windows 10. If you're using an older version,
