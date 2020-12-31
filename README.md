@@ -1,6 +1,6 @@
 # Wolf
 
-The final project for Introduction to Programming / Program Design Methods<br/>
+The final project for Introduction to Programming / Program Design Methods Binus University<br/>
 2020/2021
 
 ### What is Wolf?
