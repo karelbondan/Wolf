@@ -25,7 +25,7 @@ import time
 import socket
 import init
 import atexit
-import jawablangsung
+import langsung
 
 # GUI file, includes the main interface template, which of course I made myself using the
 # PySide2 Designer program  came together with the installed module.
@@ -84,6 +84,18 @@ class MainWindow(QMainWindow):
         self.stylesheet = 'turqoise'
         self.name = socket.gethostname()
         self.tip = True
+
+        def greeting():
+            self.ui.init.show()
+            time_now = int(time.strftime('%H'))
+            if 0 <= time_now <= 11:
+                self.ui.init.setText(f'Good morning, {self.name}.\nYour wish is my command.')
+            elif time_now < 18:
+                self.ui.init.setText(f'Good afternoon, {self.name}.\n Your wish is my command.')
+            elif time_now >= 18:
+                self.ui.init.setText(f'Good evening, {self.name}.\nYour wish is my command.')
+            else:
+                self.ui.init.setText(f'Welcome back, {self.name}.\nYour wish is my command.')
 
         def move_window(event):
             # moves the windows if the left mouse button is pressed
@@ -273,8 +285,7 @@ class MainWindow(QMainWindow):
                     self.ui.weather.show()
                     self.ui.city.setText(f'{asis[-1][0]}, {asis[-1][1]}')
                     self.ui.country.setText(time.strftime('%A, %d %B %Y'))
-                    self.ui.weather_icon.setPixmap(
-                        'C:/users/karel/PycharmProjects/pythonProjecttest/images/weather/04d.png')
+                    self.ui.weather_icon.setPixmap(f'C:/Wolf/images/icons/weather/{asis[-1][4]}')
                     self.ui.visibility.setText(f'Visibility: {asis[-1][-4][:-3]}.{asis[-1][-4][1]} km')
                     self.ui.pressure.setText(f'Pressure: {asis[-1][-3]} hPa')
                     self.ui.humidity.setText(f'Humidity: {asis[-1][-5]}%')
@@ -293,7 +304,7 @@ class MainWindow(QMainWindow):
 
         def assistant_novoice(self):
             self.ui.init.hide()
-            asis = jawablangsung.output(self.ui.commandbar.text().lower())
+            asis = langsung.output(self.ui.commandbar.text().lower())
             print(asis)
             try:
                 if type(asis[-1]) == list:
@@ -301,8 +312,7 @@ class MainWindow(QMainWindow):
                     self.ui.weather.show()
                     self.ui.city.setText(f'{asis[-1][0]}, {asis[-1][1]}')
                     self.ui.country.setText(time.strftime('%A, %d %B %Y'))
-                    self.ui.weather_icon.setPixmap(
-                        'C:/users/karel/PycharmProjects/pythonProjecttest/images/weather/04d.png')
+                    self.ui.weather_icon.setPixmap(f'C:/Wolf/images/icons/weather/{asis[-1][4]}')
                     self.ui.visibility.setText(f'Visibility: {asis[-1][-4][:-3]}.{asis[-1][-4][1]} km')
                     self.ui.pressure.setText(f'Pressure: {asis[-1][-3]} hPa')
                     self.ui.humidity.setText(f'Humidity: {asis[-1][-5]}%')
@@ -315,7 +325,7 @@ class MainWindow(QMainWindow):
                     self.ui.user_input.setText(self.ui.commandbar.text())
                     self.ui.result.setText(asis[-1])
             except:
-                self.ui.init.show()
+                greeting()
                 self.ui.search.hide()
                 self.ui.weather.hide()
 
@@ -338,7 +348,11 @@ class MainWindow(QMainWindow):
                 self.ui.user_name.setText(self.ui.change_name.text())
                 self.name = self.ui.change_name.text()
                 name = self.ui.change_name.text()
+                greeting()
+                save_config(stylesheet=self.stylesheet, name=self.name, tip=self.tip)
                 self.ui.change_name.setText('')
+                self.ui.search.hide()
+                self.ui.weather.hide()
                 print(self.name)
 
         def hide_tips():
@@ -351,7 +365,6 @@ class MainWindow(QMainWindow):
             self.ui.tip_4_buttomleft.hide()
             self.ui.arrow_downleft.hide()
             self.ui.arrow_serongkanan.hide()
-            self.ui.arrow_serongkiri.hide()
             self.ui.arrow_upleft.hide()
             self.ui.arrow_upright.hide()
             self.tip = False
@@ -368,7 +381,6 @@ class MainWindow(QMainWindow):
             self.ui.tip_4_buttomleft.show()
             self.ui.arrow_downleft.show()
             self.ui.arrow_serongkanan.show()
-            self.ui.arrow_serongkiri.show()
             self.ui.arrow_upleft.show()
             self.ui.arrow_upright.show()
             self.tip = True
@@ -464,12 +476,10 @@ class MainWindow(QMainWindow):
         self.ui.button_home.clicked.connect(lambda: self.ui.main_page.setCurrentWidget(self.ui.page_home))
         self.ui.button_home.clicked.connect(lambda: confirm_name())
         self.ui.button_show_tips.clicked.connect(lambda: show_tips())
-        self.ui.button_show_tips.clicked.connect(lambda: print(tip))
         self.ui.button_hide_tips.clicked.connect(lambda: hide_tips())
-        self.ui.button_hide_tips.clicked.connect(lambda: print(tip))
         self.ui.button_edit_name.clicked.connect(lambda: change_name())
         self.ui.button_confirm_changename.clicked.connect(lambda: confirm_name())
-        self.ui.button_confirm_changename.clicked.connect(lambda: print(name))
+        self.ui.button_documentation.clicked.connect(lambda: os.startfile('C:/Wolf/images/doc.txt'))
         self.ui.profile_change.clicked.connect(lambda: register())
         self.ui.button_color_atlas.clicked.connect(lambda: set_style('atlas'))
         self.ui.button_color_biruish.clicked.connect(lambda: set_style('biruish'))
@@ -495,6 +505,7 @@ class MainWindow(QMainWindow):
         # also removing the title bar and replacing it with the custom one
         first_launch()
         read_config()
+        greeting()
         UIFunctions.remove_title(self)
 
         # this atexit module is used to save the user configurations such as their name, their preferred
