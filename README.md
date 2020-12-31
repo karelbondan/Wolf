@@ -51,12 +51,13 @@ WIP (ignore)
 - usr img on start -> DONE, 29th Dec 2020.
 - save user settings upon exit -> DONE, 30th Dec 2020.
 - threading (if can lol, gave up with the alarm); voice and gui work together -> pending.
-- open app -> ongoing; mandatory.
+- open app -> DONE, 31st Dec 2020
 - fix path -> DONE, 29th Dec 2020.
-- make list, note -> ongoing; mandatory.
+- make list, note -> list feature discarded (time isn't enough :<), note -> DONE, 31st Dec 2020
 - expand time feature (if can) -> pending.
 - make the bg color stays the same if ever the user changed the color -> DONE, 30th Dec 2020.
 - make the profile pic and name stays the same if ever the user changes those -> DONE, 29th Dec 2020, 30th Dec 2020.
-- save user's name object to a file and open in assistant file -> ongoing.
-- ATUR FILE WOI HADEH -> partly done.
+- save user's name to a file and open in assistant file -> DONE, 31st Dec 2020
+- ATUR FILE WOI HADEH -> DONE, 31st Dec 2020
+- Differentiate between text input and voice input -> Text input DONE, 31st Dec 2020; Voice input ongoing, mandatory, final task before this thing is finally done.
 ```
