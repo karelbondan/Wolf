@@ -44,7 +44,6 @@ def voice_output_calculator(answer):
 
 
 def basic_tasks(usr_input):
-
     if 'what can you do' in usr_input:
         text = f"Hello {socket.gethostname()}, I am still in development. I can search the web, open Windows's pre-installed desktop apps, " \
                "make list, make an alarm, and many more! I will be here to assist you."
@@ -70,6 +69,8 @@ def basic_tasks(usr_input):
 
 
 def output(userinput):
+    rawinput = userinput
+
     try:
         # I separated the basic_tasks and the search function to ease the management of the codes
         # it was confusing as heck before I split them into their own respective functions.
@@ -234,60 +235,129 @@ def output(userinput):
         # print("This is an alarm test!")
 
         elif userinput[0] or userinput[1] or userinput[2] or userinput[-1] or userinput[-2] in num.predictions:
-            search = ''
-            web = 'google'
-            browse = ''
-            search_check = None
-            if 'youtube' and 'music' in userinput or 'yt' and 'music' in userinput:
-                browse = num.searches['youtube']['music']
-                web = 'youtube music'
-                if 'play' in userinput:
-                    search_check = 'music'
-            elif 'youtube' in userinput or 'yt' in userinput:
-                browse = num.searches['youtube']['youtube']
-                web = 'youtube'
-                if 'play' in userinput:
-                    search_check = 'youtube'
-            elif 'stack' and 'overflow' in userinput or 'stackoverflow' in userinput:
-                browse = num.searches['stackoverflow']
-                web = 'stackoverflow'
-            else:
-                for input in num.searches.keys():
-                    if input in userinput:
-                        web = input
-                        browse = num.searches[web]
-                        break
-                    else:
-                        continue
-                browse = num.searches[web]
-            for content in num.yt_case:
-                if content in userinput:
-                    userinput.remove(content)
-            for i in num.predictions:
-                if i in userinput:
-                    if userinput[0] == 'is':
-                        pass
-                    else:
-                        userinput = list(filter((i).__ne__, userinput))
+            # ada_pencarian is for the search term, penelusuran is for the search engine detection. if
+            # both return False it'll go to the if statement below.
+            ada_pencarian = False
+            penelusuran = False
+
+            # try to find the quotation marks inside the user input. user can use single quote marks to quote
+            # stuff instead of using another double quote marks.
+            try:
+                ada_pencarian = re.findall(r'\s*(".+")\s*', rawinput)[0]
+                penelusuran = re.sub(ada_pencarian, '', rawinput).split()
+            except Exception as e:
+                print(e)
+
+            # the if statement below is the old one without using the double quote marks. My friend tested my program
+            # and the easily breaks it by just typing multiple search engines into the command bar. for that he
+            # suggested on adding double quote marks for the search term. That's what I did here. The else statement
+            # does that.
+            if not ada_pencarian:
+                search = ''
+                web = 'google'
+                browse = ''
+                search_check = None
+                if 'youtube' and 'music' in userinput or 'yt' and 'music' in userinput:
+                    browse = num.searches['youtube']['music']
+                    web = 'youtube music'
+                    if 'play' in userinput:
+                        search_check = 'music'
+                elif 'youtube' in userinput or 'yt' in userinput:
+                    browse = num.searches['youtube']['youtube']
+                    web = 'youtube'
+                    if 'play' in userinput:
+                        search_check = 'youtube'
+                elif 'stack' and 'overflow' in userinput or 'stackoverflow' in userinput:
+                    browse = num.searches['stackoverflow']
+                    web = 'stackoverflow'
                 else:
-                    pass
-            for final_items in userinput:
-                search += f'{final_items}+'
-            if search_check == 'youtube':
-                search_new = ''
-                for term in search.split('+'):
-                    search_new += f'{term} '
-                yt = youtube.playonyt(search)
-                return None, f'{yt} {search_new}'
-            elif search_check == 'music':
-                search_new = ''
-                for term in search.split('+'):
-                    search_new += f'{term} '
-                ytmusic = youtube.play_yt_music(search)
-                return None, f'{ytmusic} {search_new}'
+                    for input in num.searches.keys():
+                        if input in userinput:
+                            web = input
+                            browse = num.searches[web]
+                            break
+                        else:
+                            continue
+                    browse = num.searches[web]
+                for content in num.yt_case:
+                    if content in userinput:
+                        userinput.remove(content)
+                for prediction in num.predictions:
+                    if prediction in userinput:
+                        if userinput[0] == 'is':
+                            pass
+                        else:
+                            userinput = list(filter((prediction).__ne__, userinput))
+                    else:
+                        pass
+                for final_items in userinput:
+                    search += f'{final_items}+'
+                if search_check == 'youtube':
+                    search_new = ''
+                    for term in search.split('+'):
+                        search_new += f'{term} '
+                    yt = youtube.playonyt(search)
+                    return None, f'{yt} {search_new}'
+                elif search_check == 'music':
+                    search_new = ''
+                    for term in search.split('+'):
+                        search_new += f'{term} '
+                    ytmusic = youtube.play_yt_music(search)
+                    return None, f'{ytmusic} {search_new}'
+                else:
+                    webbrowser.open_new_tab(f'{browse}{search}')
+                    return None, f'opening {web} ...'
             else:
-                webbrowser.open_new_tab(f'{browse}{search}')
-                return None, f'opening {web} ...'
+                # initializing variables
+                web = 'google'
+                browse = ''
+                search_check = None
+
+                # a special case for youtube, yt music, stackoverflow and reddit because they're added last.
+                if 'youtube' and 'music' in penelusuran or 'yt' and 'music' in penelusuran:
+                    browse = num.searches['youtube']['music']
+                    web = 'youtube music'
+                    if 'play' in penelusuran:
+                        search_check = 'music'
+                elif 'youtube' in penelusuran or 'yt' in penelusuran:
+                    browse = num.searches['youtube']['youtube']
+                    web = 'youtube'
+                    if 'play' in penelusuran:
+                        search_check = 'youtube'
+                elif 'stack' and 'overflow' in penelusuran or 'stackoverflow' in penelusuran:
+                    browse = num.searches['stackoverflow']
+                    web = 'stackoverflow'
+                elif 'reddit' in penelusuran:
+                    browse = num.searches['reddit']
+                    web = 'reddit'
+                else:
+                    for input in num.searches.keys():
+                        if input in userinput:
+                            web = input
+                            browse = num.searches[web]
+                            break
+                        else:
+                            continue
+                    browse = num.searches[web]
+                for prediction in penelusuran:
+                    if prediction in num.predictions:
+                        penelusuran = list(filter((prediction).__ne__, penelusuran))
+                    else:
+                        pass
+
+                if search_check == 'youtube':
+                    yt = youtube.playonyt(ada_pencarian)
+                    return yt
+
+                elif search_check == 'music':
+                    ytmusic = youtube.play_yt_music(ada_pencarian)
+                    return ytmusic
+
+                else:
+                    webbrowser.open_new_tab(f'{browse}{ada_pencarian}')
+                print(ada_pencarian)
+                print(penelusuran)
+
 
         else:
             """if 'google' in userinput: userinput.remove('google')
@@ -343,7 +413,7 @@ def output(userinput):
         pass
 
 
-"""
+# """
 time.sleep(1)
 while 1:
     input_temp = input('enter your question')
