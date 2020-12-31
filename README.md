@@ -9,17 +9,18 @@ Wolf is a virtual assistant program written in Python, as you can see on the rig
 Wolf also features user interface. User can customize some of Wolf's features such as their name,
 their preffered background color, and their profile picture.
 
-### Features (as of 29th December 2020)
+### Features (as of 31st December 2020)
 
 1. Define something
 2. Give short description of known people
 3. Make lists and notes
 4. Open user-installed apps
-5. Search the web
+5. Search the web (multiple search engines)
 6. Telling current weather of a city
 7. Telling jokes
 8. Voice commands
 9. User interface
+10. Play video on YouTube & music on YT Music based on user search
 
 ### Current state
 
