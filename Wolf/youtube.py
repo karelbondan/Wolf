@@ -3,10 +3,11 @@ import webbrowser
 from bs4 import BeautifulSoup
 
 
-# I found this function below on a module called PyWhatKit. instead of installing I only picked this one
-# particular function. The function underneath below function is the one I defined myself. The function below
-# can be found at https://github.com/Ankit404butfound/PyWhatKit/blob/master/pywhatkit/mainfunctions.py.
-# I'll try explaining on comments on how the function below works. I didn't change anything for obvious reasons.
+# I found this function below on a module called PyWhatKit. instead of installing I only picked this one particular
+# function. The function underneath below function is the one I defined myself. The function below can be found at
+# https://github.com/Ankit404butfound/PyWhatKit/blob/master/pywhatkit/mainfunctions.py. I'll try explaining on
+# comments on how the function below works. I only modify the return value of the function a bit for obvious reasons.
+# (keeping the originality of the source code and respecting the developer, Ankit).
 
 def playonyt(topic):
     # url for request module.
@@ -34,7 +35,7 @@ def playonyt(topic):
     print("Videos found, opening most recent video")
     webbrowser.open("https://www.youtube.com" + lst[count - 5])
 
-    return None, f'Playing a video based on your search: {topic}'
+    return None, f'Playing a video based on your search:\n\n"{topic}"'
 
 
 # this function below is the one I defined myself, I used Ankit's (PyWhatKit module developer) technique
@@ -89,7 +90,7 @@ def play_yt_music(usrinput):
     # playing the music
     webbrowser.open(f'https://music.youtube.com/watch?v={unfiltered_contents[counter - 17]}')
 
-    return None, f'Playing a music based on your search: {usrinput}'
+    return None, f'Playing a music based on your search:\n\n"{usrinput}"'
 
 
 # debugging
