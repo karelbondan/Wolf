@@ -18,7 +18,7 @@ their preffered background color, and their profile picture.
 5. Search the web (multiple search engines)
 6. Telling current weather of a city
 7. Telling jokes
-8. Voice commands (WIP)
+8. Voice commands
 9. User interface
 10. Play video on YouTube & music on YT Music based on user search
 
@@ -42,7 +42,9 @@ If someone somehow finds this and wants to clone this repo, Wolf only works on W
 This program was made on Windows 10 and uses file modifications, 
 so all the files and folders necessary for this program to run is referenced to Windows 10. If you're using an older version,
 feel free to try it. Important note is that I haven't tested this on the older version of Windows, so the program may not work
-correctly (especially on first launch), you may get blank user profile image on the top right of the GUI.
+correctly (especially on first launch), you may get blank user profile image on the top right of the GUI and on the user settings
+page.</br>
+> ps. You can always change your profile picture and Wolf will remember your changes.
 
 ```
 WIP (ignore)
@@ -59,5 +61,6 @@ WIP (ignore)
 - make the profile pic and name stays the same if ever the user changes those -> DONE, 29th Dec 2020, 30th Dec 2020.
 - save user's name to a file and open in assistant file -> DONE, 31st Dec 2020
 - ATUR FILE WOI HADEH -> DONE, 31st Dec 2020
-- Differentiate between text input and voice input -> Text input DONE, 31st Dec 2020; Voice input ongoing, mandatory, final task before this thing is finally done.
+- Differentiate between text input and voice input -> Text input DONE, 31st Dec 2020; Voice input DONE, 1st Jan 2021
+- Add background listening function -> okay yeah, maybe the final final one. -> ongoing.
 ```
