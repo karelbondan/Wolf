@@ -517,7 +517,7 @@ def voice_input():
                     while input_error:
                         try:
                             listen_sound_execute()
-                            audio_input_2 = sr.listen(input, 2, 4)
+                            audio_input_2 = sr.listen(input, 5, 5)
                             audio_data_2 = sr.recognize_google(audio_input_2).lower()
                             input_error = False
                             return audio_data_2, web, 'play'
@@ -533,7 +533,7 @@ def voice_input():
                     while input_error:
                         try:
                             listen_sound_execute()
-                            audio_input_2 = sr.listen(input, 2, 4)
+                            audio_input_2 = sr.listen(input, 5, 5)
                             audio_data_2 = sr.recognize_google(audio_input_2).lower()
                             input_error = False
                             return audio_data_2, web, 'search'
@@ -549,7 +549,7 @@ def voice_input():
                 while input_error:
                     try:
                         listen_sound_execute()
-                        audio_input_2 = sr.listen(input, 2, 4)
+                        audio_input_2 = sr.listen(input, 5, 5)
                         audio_data_2 = sr.recognize_google(audio_input_2).lower()
                         input_error = False
                         return audio_data_2, 'note', 'note'
