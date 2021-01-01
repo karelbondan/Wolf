@@ -6,8 +6,9 @@ import re
 destination_path = f'C:\\Wolf\\users\\{socket.gethostname()}'
 
 # list of predictions
-prediction = ['make', 'new', 'note', 'view', 'delete', 'remove', 'preview', 'see', 'open', 'edit', 'change', 'my',
-              'a', 'the']
+prediction = ['create', 'make', 'new', 'note', 'view', 'delete', 'remove', 'preview', 'see', 'open', 'edit', 'change', 'my',
+              'a', 'the', 'notes']
+prediction_voice = ['create', 'make', 'new', 'note', 'a', 'notes']
 
 
 # function to check whether a note exist or not
@@ -65,7 +66,7 @@ def note(input_check_result, input='non'):
         user_note = open('usernote.notes', 'w', encoding='utf-8')
         if catatan_note == []:
             return None, f'Please specify your note by using double quotation marks.' \
-                         f'example: Make a new note "Hello World!"'
+                         f' example: Make a new note "Hello World!"'
         else:
             pass
         user_note.write(catatan_note)
@@ -92,7 +93,7 @@ def check_userinput(input):
         if perintah == 'view' or perintah == 'preview' or perintah == 'see' or perintah == 'open':
             command = 'view'
             break
-        if perintah == 'new' or perintah == 'make':
+        if perintah == 'new' or perintah == 'make' or perintah == 'create':
             command = 'make'
             break
         if perintah == 'delete' or perintah == 'remove':
