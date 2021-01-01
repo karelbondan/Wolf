@@ -1,6 +1,7 @@
 import os
 import re
 import socket
+import time
 import webbrowser
 import requests
 import wolframalpha
@@ -13,20 +14,31 @@ import weather as wt
 import apps
 import youtube
 
+# dict to store user's name later on.
 user_config = {}
+
+# path containing user's config.
 destination_path = f'C:\\Wolf\\users'
+
+# the initial variable and user's default name.
 name = socket.gethostname()
 
-
+# function to get user's name.
 def read_config():
+    # global the name so the variable can be used on other functions.
     global name
+
+    # checking whether the config file exists or not.
     config_file = False
+
+    # changing the working path and listing the files.
     os.chdir(f'{destination_path}\\{socket.gethostname()}')
     for config in os.listdir():
         if config == 'config.json':
             config_file = True
             break
 
+    # setting user's name if config file is available
     if config_file == True:
         with open('config.json', 'r', encoding='utf-8') as file:
             file = file.read()
@@ -37,31 +49,39 @@ def read_config():
         pass
 
 
+# basic tasks and questions
 def basic_tasks(usr_input):
-    if 'what can you do' in usr_input:
-        text = f"Hello {name}, I am still in development. I can search the web, open Windows's pre-installed desktop apps, " \
-               "make list, make an alarm, and many more! I will be here to assist you."
+
+    if 'what can you do' in usr_input or 'how can you assist me' in usr_input:
+        text = f"Hello {name}. I can search the web, open Windows's pre-installed desktop apps, " \
+               "make a note for you, telling the weather, and some few more. You can read more on my documentation."
         print(text)  # will return the text to be displayed on the GUI after it's finished.
         return text  # note to self -> this return will be used to display the text in the GUI
 
     elif 'who are you' in usr_input or 'what is your name' in usr_input:
-        text = f"Hello {name}, I am Gonpachiro. Nice to meet you!"
+        text = f"The name's Wolf. Nice to meet you, {name}!"
         print(text)  # will return the text to be displayed on the GUI after it's finished.
         return text  # note to self -> this return will be used to display the text in the GUI
 
-    elif 'what is my name' in usr_input:
+    elif 'what is my name' in usr_input or 'how do you call me' in usr_input:
         text = f'I recognize you as {name}. I hope I spelled your name correctly ...'
         print(text)
         return text
 
-    elif 'tell me a joke' in usr_input:
+    elif 'tell me a joke' in usr_input or 'amuse me' in usr_input or 'entertain me' in usr_input or 'make me laugh' in usr_input:
         text = jk.jokes()
+        print(text)
+        return text
+
+    elif 'how are you' in usr_input:
+        text = num.randomize_response()
         print(text)
         return text
 
     return ''
 
 
+# main function
 def output(userinput):
     # setting the name of the user to their saved configuration
     read_config()
@@ -275,7 +295,7 @@ def output(userinput):
             if not penelusuran:
                 webbrowser.open_new_tab(f'https://www.google.com/search?q={rawinput}')
                 return None, f'Tip: input your search term wrapped in double quotation marks for a specific search engine ' \
-                             f'as shown in the example -> example: youtube "brofist". You can see the documentation for a ' \
+                             f'as shown in the example -> Youtube "brofist". You can see the documentation for a ' \
                              f'complete list of supported search engines and what to do with them.'
             else:
                 # initializing variables
