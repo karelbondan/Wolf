@@ -594,7 +594,7 @@ class Ui_MainWindow(object):
         self.button_color_grayscale.setMinimumSize(QSize(50, 50))
         self.button_color_grayscale.setMaximumSize(QSize(50, 50))
         icon25 = QIcon()
-        icon25.addFile(u"../../../../../../PycharmProjects/pythonProjecttest/images/icons/color_grayscale.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon25.addFile(u"C:/Wolf/images/icons/color_grayscale.png", QSize(), QIcon.Normal, QIcon.Off)
         self.button_color_grayscale.setIcon(icon25)
         self.button_color_grayscale.setIconSize(QSize(50, 50))
         self.arrow_upright = QLabel(self.frame_settings)
@@ -846,7 +846,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Wolf", None))
 #if QT_CONFIG(tooltip)
         self.button_minimize_app.setToolTip(QCoreApplication.translate("MainWindow", u"Minimize", None))
 #endif // QT_CONFIG(tooltip)
