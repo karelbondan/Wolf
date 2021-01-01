@@ -38,7 +38,7 @@ on the user's locale language. The same bug goes for giving description of someo
 ### Important Note
 
 If someone somehow finds this and wants to clone this repo, Wolf only works on Windows and you need to install some depedencies if you haven't:
-- [PyAudio](https://pypi.org/project/PyAudio/)</br>If you have any errors on installing, [go to this page](https://stackoverflow.com/questions/52283840/i-cant-install-pyaudio-on-windows-how-to-solve-error-microsoft-visual-c-14)
+- [PyAudio](https://pypi.org/project/PyAudio/) (If you have any errors on installing, [go to this page](https://stackoverflow.com/questions/52283840/i-cant-install-pyaudio-on-windows-how-to-solve-error-microsoft-visual-c-14))
 - [playsound](https://pypi.org/project/playsound/)
 - [gTTS](https://pypi.org/project/gTTS/)
 - [SpeechRecognition](https://pypi.org/project/SpeechRecognition/)
@@ -58,20 +58,20 @@ page.</br>
 > ps. You can always change your profile picture and Wolf will remember your changes.
 
 ```
-WIP (ignore)
+WIP (ignore) [All done]
 
 - weather icons -> DONE, 29th Dec 2020.
 - usr img on start -> DONE, 29th Dec 2020.
 - save user settings upon exit -> DONE, 30th Dec 2020.
-- threading (if can lol, gave up with the alarm); voice and gui work together -> pending.
+- threading (if can lol, gave up with the alarm); voice and gui work together -> discarded.
 - open app -> DONE, 31st Dec 2020
 - fix path -> DONE, 29th Dec 2020.
 - make list, note -> list feature discarded (time isn't enough :<), note -> DONE, 31st Dec 2020
-- expand time feature (if can) -> pending.
+- expand time feature (if can) -> discarded.
 - make the bg color stays the same if ever the user changed the color -> DONE, 30th Dec 2020.
 - make the profile pic and name stays the same if ever the user changes those -> DONE, 29th Dec 2020, 30th Dec 2020.
 - save user's name to a file and open in assistant file -> DONE, 31st Dec 2020
 - ATUR FILE WOI HADEH -> DONE, 31st Dec 2020
 - Differentiate between text input and voice input -> Text input DONE, 31st Dec 2020; Voice input DONE, 1st Jan 2021
-- Add background listening function -> okay yeah, maybe the final final one. -> ongoing.
+- Add background listening function -> okay yeah, maybe the final final one. -> DONE, 2nd Jan 2021
 ```
