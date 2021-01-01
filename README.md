@@ -21,19 +21,21 @@ their preffered background color, and their profile picture.
 8. Voice commands
 9. User interface
 10. Play video on YouTube & music on YT Music based on user search
+11. Always listen in background, user can call Wolf by using "wake up phrase"
 
 ### Current state
 
-This project is unfinished. Minor updates will come later when the feature has been implemented (you can
-read on the bottommost of this note). I don't plan to continue adding features too (might change my mind later.
+This project is finished for now. This thing has chipped away my sanity long enough, time to say goodbye to it.
+I don't plan on adding features as of now (might change my mind later;
 If ever I don't have anything to do, maybe I'll try implementing more stuff into Wolf).
 
 ### Bugs
 
-- Defining something can sometimes be buggy, as it gives the explanation on other language other than English, depends
-on the user's locale language. The same bug goes for giving description of someone.
+- Giving description of someone sometimes uses user's locale language.
   
-- Before Wolf has finished talking, the GUI will be frozen. I'll try to fix this later if time and luck can cooperate.
+- Before Wolf has finished talking, the GUI will be frozen.
+
+- If you call Wolf using the wake up call, it'll sometimes prompt the user to command twice after the first command has been executed.
 
 ### Important Note
 
