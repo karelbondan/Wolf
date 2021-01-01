@@ -1,4 +1,6 @@
 import wolframalpha
+
+import apps
 import checking as num
 import webbrowser
 import requests
@@ -15,6 +17,43 @@ import day
 import time
 import youtube
 import socket
+import speech_recognition
+import notes
+import threading
+
+sr = speech_recognition.Recognizer()
+
+user_config = {}
+destination_path = f'C:\\Wolf\\users'
+name = socket.gethostname()
+
+
+def listen_sound():
+    playsound.playsound('C:/Wolf/bin/listening.wav')
+
+
+def listen_sound_execute():
+    t1 = threading.Thread(target=listen_sound)
+    t1.start()
+
+
+def read_config():
+    global name
+    config_file = False
+    os.chdir(f'{destination_path}\\{socket.gethostname()}')
+    for config in os.listdir():
+        if config == 'config.json':
+            config_file = True
+            break
+
+    if config_file == True:
+        with open('config.json', 'r', encoding='utf-8') as file:
+            file = file.read()
+        file2 = eval(file)
+        name = file2['name']
+        user_config.update({'name': file2['name']})
+    else:
+        pass
 
 
 def voice_output_calculator(answer):
@@ -24,7 +63,10 @@ def voice_output_calculator(answer):
     elif answer == 'Error':
         audiocreated = gTTS(text=f"Sorry, your term did not bring up any result. Try simplifying the question.",
                             lang='en', slow=False)
-    elif 'playing a video' in answer or 'playing a music' in answer:
+    elif answer == 'penelusuran = False':
+        audiocreated = gTTS(text=f"Here are the results from the web. You can read the tip for more efficient result.",
+                            lang='en', slow=False)
+    elif 'Playing a video' in answer or 'Playing a music' in answer:
         audiocreated = gTTS(text=f"{answer}")
     elif (len(answer) > 10 and not re.match(r'\s*(\d+)\s*', answer)):
         audiocreated = gTTS(text=f"{answer}, {num.randomize}", lang='en', slow=False)
@@ -43,34 +85,45 @@ def voice_output_calculator(answer):
     os.remove(f'tts_temp-{a}.mp3')
 
 
-def basic_tasks(usr_input):
-    def voice(usrinput):
-        audiocreated = gTTS(text=f"{usrinput}", lang='en', slow=False)
-        audiocreated.save('test.mp3')
-        playsound.playsound('test.mp3')
-        os.remove('test.mp3')
+def voice(usrinput):
+    audiocreated = gTTS(text=f"{usrinput}", lang='en', slow=False)
+    audiocreated.save('test.mp3')
+    playsound.playsound('test.mp3')
+    os.remove('test.mp3')
+    return None, usrinput
 
-    if 'what can you do' in usr_input:
-        text = f"Hello {socket.gethostname()}, I am still in development. I can search the web, open Windows's pre-installed desktop apps, " \
-               "make list, make an alarm, and many more! I will be here to assist you."
+
+def basic_tasks(usr_input):
+    # I differentiate the voice output from above because the above one is already specific for some
+    # questions. It'll produce weird outputs if I were to use above's function.
+
+    if 'what can you do' in usr_input or 'how can you assist me' in usr_input:
+        text = f"Hello {name}. I can search the web, open Windows's pre-installed desktop apps, " \
+               "make a note for you, telling the weather, and some few more. You can read more on my documentation."
         print(text)  # will return the text to be displayed on the GUI after it's finished.
         voice(text)
         return text  # note to self -> this return will be used to display the text in the GUI
 
     elif 'who are you' in usr_input or 'what is your name' in usr_input:
-        text = f"Hello {socket.gethostname()}, I am Wolf. Nice to meet you!"
+        text = f"The name's Wolf. Nice to meet you, {name}!"
         print(text)  # will return the text to be displayed on the GUI after it's finished.
         voice(text)
         return text  # note to self -> this return will be used to display the text in the GUI
 
-    elif 'what is my name' in usr_input:
-        text = f'I recognize you as {socket.gethostname()}. I hope I spelled your name correctly ...'
+    elif 'what is my name' in usr_input or 'how do you call me' in usr_input:
+        text = f'I recognize you as {name}. I hope I spelled your name correctly ...'
         print(text)
         voice(text)
         return text
 
-    elif 'tell me a joke' in usr_input:
+    elif 'tell me a joke' in usr_input or 'amuse me' in usr_input or 'entertain me' in usr_input or 'make me laugh' in usr_input:
         text = jk.jokes()
+        print(text)
+        voice(text)
+        return text
+
+    elif 'how are you' in usr_input:
+        text = num.randomize_response()
         print(text)
         voice(text)
         return text
@@ -79,6 +132,10 @@ def basic_tasks(usr_input):
 
 
 def output(userinput):
+    # setting the name of the user to their saved configuration
+    read_config()
+
+    # preserving the input before splitting it
     rawinput = userinput
 
     try:
@@ -110,9 +167,47 @@ def output(userinput):
             if check_time >= 2:
                 time = day.day_now()
                 print(time[0])
-                return None, time
+                return day.voice_output_time(time[0]), time
             else:
                 pass
+
+        check_note = notes.check_userinput(userinput)
+        if check_note[0] >= 3:
+            if check_note[-1] == 'view':
+                note = notes.note(input_check_result=check_note, input=userinput)
+                if 'Here is your note' in note[-1].split(':'):
+                    voice('Here is your note.')
+                else:
+                    voice('No notes found.')
+                return note
+
+            elif check_note[-1] == 'make':
+                note = notes.note(input_check_result=check_note, input=userinput)
+                if 'Done' in note[-1].split('!'):
+                    voice('Done! Your note has been created.')
+                else:
+                    voice('No notes found.')
+                return note
+
+            elif check_note[-1] == 'edit':
+                return voice(f'Sorry, this feature is not supported yet'), 'Not supported yet.'
+
+            elif check_note[-1] == 'delete':
+                note = notes.delete_note()
+                if note[-1] == 'Note successfully deleted':
+                    voice('Done!')
+                else:
+                    voice('No notes found.')
+                return note
+            else:
+                pass
+        else:
+            pass
+
+        open_app = apps.check_userinput(userinput)
+        if open_app[0] >= 2:
+            os.startfile(num.applications[open_app[-1]])
+            return voice(f'Starting {open_app[-1]}'), f'Starting {open_app[-1]}...'
 
         # splitting the input to make it easier to manage.
         userinput = userinput.split()
@@ -245,113 +340,236 @@ def output(userinput):
                 return None, 'Sorry, your term did not bring up any result. Try simplifying the question.'
 
         elif userinput[0] or userinput[1] or userinput[2] or userinput[-1] or userinput[-2] in num.predictions:
-            search = ''
-            web = 'google'
-            browse = ''
-            search_check = None
-            if 'youtube' and 'music' in userinput or 'yt' and 'music' in userinput:
-                browse = num.searches['youtube']['music']
-                web = 'youtube music'
-                if 'play' in userinput:
-                    search_check = 'music'
-            elif 'youtube' in userinput or 'yt' in userinput:
-                browse = num.searches['youtube']['youtube']
-                web = 'youtube'
-                if 'play' in userinput:
-                    search_check = 'youtube'
-            elif 'stack' and 'overflow' in userinput or 'stackoverflow' in userinput:
-                browse = num.searches['stackoverflow']
-                web = 'stackoverflow'
-            else:
-                for input in num.searches.keys():
-                    if input in userinput:
-                        web = input
-                        browse = num.searches[web]
-                        break
-                    else:
-                        continue
-                browse = num.searches[web]
-            for content in num.yt_case:
-                if content in userinput:
-                    userinput.remove(content)
-            for prediction in num.predictions:
-                if prediction in userinput:
-                    if userinput[0] == 'is':
-                        pass
-                    else:
-                        userinput = list(filter((prediction).__ne__, userinput))
+            # ada_pencarian is for the search term, penelusuran is for the search engine detection. if
+            # both return False it'll go to the if statement below.
+            ada_pencarian = re.findall(r'\s*(".+")\s*', rawinput)
+            penelusuran = False
+
+            # try to find the quotation marks inside the user input. user can use single quote marks to quote
+            # stuff instead of using another double quote marks.
+            try:
+                ada_pencarian = re.findall(r'\s*(".+")\s*', rawinput)[0].replace('"',
+                                                                                 '')  # for removing things in rawinput
+                penelusuran = re.sub(ada_pencarian, '', rawinput).split()
+            except Exception:
+                pass
+
+            # the if statement below is the old one without using the double quote marks. My friend tested my program
+            # and the easily breaks it by just typing multiple search engines into the command bar. for that he
+            # suggested on adding double quote marks for the search term. That's what I did here. The else statement
+            # does that.
+            if not penelusuran:
+                search = ''
+                web = 'google'
+                browse = ''
+                search_check = None
+                if 'youtube' and 'music' in userinput or 'yt' and 'music' in userinput:
+                    browse = num.searches['youtube']['music']
+                    web = 'youtube music'
+                    if 'play' in userinput:
+                        search_check = 'music'
+                elif 'youtube' in userinput or 'yt' in userinput:
+                    browse = num.searches['youtube']['youtube']
+                    web = 'youtube'
+                    if 'play' in userinput:
+                        search_check = 'youtube'
+                elif 'stack' and 'overflow' in userinput or 'stackoverflow' in userinput:
+                    browse = num.searches['stackoverflow']
+                    web = 'stackoverflow'
                 else:
-                    pass
-            for final_items in userinput:
-                search += f'{final_items}+'
-            if search_check == 'youtube':
-                search_new = ''
-                for term in search.split('+'):
-                    search_new += f'{term} '
-                yt = youtube.playonyt(search)
-                voice_output_calculator(f'{yt} {search_new}')
-            elif search_check == 'music':
-                search_new = ''
-                for term in search.split('+'):
-                    search_new += f'{term} '
-                ytmusic = youtube.play_yt_music(search)
-                voice_output_calculator(f'{ytmusic} {search_new}')
+                    for input in num.searches.keys():
+                        if input in userinput:
+                            web = input
+                            browse = num.searches[web]
+                            break
+                        else:
+                            continue
+                    browse = num.searches[web]
+                for content in num.yt_case:
+                    if content in userinput:
+                        userinput.remove(content)
+                for prediction in num.predictions:
+                    if prediction in userinput:
+                        if userinput[0] == 'is':
+                            pass
+                        else:
+                            userinput = list(filter((prediction).__ne__, userinput))
+                    else:
+                        pass
+
+                for final_items in userinput:
+                    search += f'{final_items} '
+
+                if search_check == 'youtube':
+                    yt = youtube.playonyt(search)
+                    return voice(yt[-1]), yt
+
+                elif search_check == 'music':
+                    ytmusic = youtube.play_yt_music(search)
+                    return voice(ytmusic[-1]), ytmusic
+
+                else:
+                    webbrowser.open_new_tab(f'https://www.google.com/search?q={rawinput}')
+                    return voice_output_calculator(
+                        'penelusuran = False'), f'Tip: input your search term wrapped in double quotation marks for a specific search engine ' \
+                                                f'as shown in the example -> Youtube "brofist". You can see the documentation for a ' \
+                                                f'complete list of supported search engines and what to do with them.'
             else:
-                webbrowser.open_new_tab(f'{browse}{search}')
-                voice_output_calculator(web)
+                # initializing variables
+                web = 'google'
+                browse = ''
+                search_check = None
+
+                # a special case for youtube, yt music, stackoverflow and reddit because they're added last.
+                if 'youtube' and 'music' in penelusuran or 'yt' and 'music' in penelusuran:
+                    browse = num.searches['youtube']['music']
+                    web = 'youtube music'
+                    if 'play' in penelusuran:
+                        search_check = 'music'
+                elif 'youtube' in penelusuran or 'yt' in penelusuran:
+                    browse = num.searches['youtube']['youtube']
+                    web = 'youtube'
+                    if 'play' in penelusuran:
+                        search_check = 'youtube'
+                elif 'stack' and 'overflow' in penelusuran or 'stackoverflow' in penelusuran:
+                    browse = num.searches['stackoverflow']
+                    web = 'stackoverflow'
+                elif 'reddit' in penelusuran:
+                    browse = num.searches['reddit']
+                    web = 'reddit'
+                else:
+                    for input in num.searches.keys():
+                        if input in userinput:
+                            web = input
+                            browse = num.searches[web]
+                            break
+                        else:
+                            continue
+                    browse = num.searches[web]
+                for prediction in penelusuran:
+                    if prediction in num.predictions:
+                        penelusuran = list(filter((prediction).__ne__, penelusuran))
+                    else:
+                        pass
+
+                if search_check == 'youtube':
+                    yt = youtube.playonyt(ada_pencarian)
+                    return voice(yt[-1]), yt
+
+                elif search_check == 'music':
+                    ytmusic = youtube.play_yt_music(ada_pencarian)
+                    return voice(ytmusic[-1]), ytmusic
+
+                else:
+                    webbrowser.open_new_tab(f'{browse}{ada_pencarian}')
+                    print(ada_pencarian)
+                    print(penelusuran)
+                    return voice(
+                        f'Okay, searching "{ada_pencarian}" on {web}'), f'Okay, searching "{ada_pencarian}" on {web}'
 
         else:
-            """if 'google' in userinput: userinput.remove('google')
-            print(userinput)
-            search = ''
-            for items in userinput:
-                search += f'{items}+'
-            webbrowser.open_new_tab(f'https://www.google.com/search?q={search}')"""
-            pass
+            if 'google' in rawinput:
+                rawinput.replace('google', '')
+            webbrowser.open_new_tab(f'https://www.google.com/search?q={rawinput}')
 
-        """
-            elif userinput[0] == 'search':
-                for i in num.preposition:
-                    if i in userinput:
-                        userinput.remove(i)
-                search = ''
-                if 'for' in userinput: userinput.remove('for')
-                print(userinput)
-                if 'youtube' in userinput:
-                    for i in range(userinput.index('search') + 1, len(userinput) - 1):
-                        search += f'{userinput[i]}+'
-                    webbrowser.open_new_tab(f'https://www.youtube.com/results?search_query={search}')
-                else:
-                    for i in range(userinput.index('search') + 1, len(userinput)):
-                        search += f'{userinput[i]}+'
-                    web = userinput[-1]
-                    if web == 'yahoo':
-                        webbrowser.open_new_tab(f'https://search.yahoo.com/search?p={search}')
-                    elif web == 'bing':
-                        webbrowser.open_new_tab(f'https://www.bing.com/search?q={search}')
-                    else:
-                        if 'google' in web:
-                            webbrowser.open_new_tab(f'https://www.google.com/search?q={search}')
-                        else:
-                            webbrowser.open_new_tab(f'https://www.google.com/search?q={search}{web}')
-                            
-            elif 'youtube' in userinput:
-                search = ''
-                if 'search' in userinput:
-                    if 'for' in userinput: userinput.remove('for')
-                    if len(userinput[userinput.index('search') + 1:]) > 1:
-                        print(userinput[userinput.index('search'):])
-                        for i in range(userinput.index('search') + 1, len(userinput)):
-                            search += f'{userinput[i]}+'
-                        webbrowser.open_new_tab(f'https://www.youtube.com/results?search_query={search}')
-                    else:
-                        search = userinput[-1]
-                        webbrowser.open_new_tab(f'https://www.youtube.com/results?search_query={search}')
-                else:
-                    webbrowser.open_new_tab(f'https://www.youtube.com/')
-                """
     except:
         pass
+
+
+def voice_input():
+    with speech_recognition.Microphone() as input:
+        audio_input = sr.listen(input, 2, 5)
+        audio_data = ''
+
+        try:
+            check_1 = False
+            check_2 = False
+            check_3 = False
+            input_error = True
+            counter = 0
+            web = 'google'
+            audio_data = sr.recognize_google(audio_input).lower()
+
+            for checking in audio_data.split():
+                if checking in num.preposition:
+                    check_1 = True
+                elif checking in num.prediction_2:
+                    check_2 = True
+                elif checking in num.websites:
+                    for website in num.websites:
+                        if website == checking:
+                            web = website
+                            break
+                    check_3 = True
+                else:
+                    pass
+
+            for checking_note in audio_data.split():
+                if checking_note in notes.prediction_voice:
+                    counter += 1
+                else:
+                    pass
+
+            if check_1 and check_2 and check_3:
+                if 'play' in audio_data.split() and (web == 'youtube' or web == 'music'):
+                    voice(f'Okay, what do you want me to play on {web}?')
+
+                    while input_error:
+                        try:
+                            listen_sound_execute()
+                            audio_input_2 = sr.listen(input, 2, 4)
+                            audio_data_2 = sr.recognize_google(audio_input_2).lower()
+                            input_error = False
+                            return audio_data_2, web, 'play'
+
+                        except speech_recognition.UnknownValueError:
+                            voice(f'Sorry, I didn\'t get that. Please try saying it again.')
+
+                        except speech_recognition.RequestError:
+                            return 'maintenance', 'maintenance', 'maintenance'
+
+                else:
+                    voice(f'Okay, what do you want me to search on {web}?')
+                    while input_error:
+                        try:
+                            listen_sound_execute()
+                            audio_input_2 = sr.listen(input, 2, 4)
+                            audio_data_2 = sr.recognize_google(audio_input_2).lower()
+                            input_error = False
+                            return audio_data_2, web, 'search'
+
+                        except speech_recognition.UnknownValueError:
+                            voice(f'Sorry, I didn\'t get that. Please try saying it again.')
+
+                        except speech_recognition.RequestError:
+                            return 'maintenance', 'maintenance', 'maintenance'
+
+            elif counter >= 3:
+                voice(f'Okay, what do you want me to write on your note?')
+                while input_error:
+                    try:
+                        listen_sound_execute()
+                        audio_input_2 = sr.listen(input, 2, 4)
+                        audio_data_2 = sr.recognize_google(audio_input_2).lower()
+                        input_error = False
+                        return audio_data_2, 'note', 'note'
+
+                    except speech_recognition.UnknownValueError:
+                        voice(f'Sorry, I didn\'t get that. Please try saying it again.')
+
+                    except speech_recognition.RequestError:
+                        return 'maintenance', 'maintenance', 'maintenance'
+
+            else:
+                pass
+
+        except speech_recognition.UnknownValueError:
+            return 'error', 'error', 'error'
+
+        except speech_recognition.RequestError:
+            return 'maintenance', 'maintenance', 'maintenance'
+
+        return audio_data, 'output', 'output'
 
 
 """
