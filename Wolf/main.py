@@ -26,6 +26,8 @@ import socket
 import init
 import atexit
 import langsung
+import playsound
+import threading
 
 # GUI file, includes the main interface template, which of course I made myself using the
 # PySide2 Designer program  came together with the installed module.
@@ -84,6 +86,13 @@ class MainWindow(QMainWindow):
         self.stylesheet = 'turqoise'
         self.name = socket.gethostname()
         self.tip = True
+
+        def listen_sound():
+            playsound.playsound('C:/Wolf/bin/listening.wav')
+
+        def listen_sound_execute():
+            t1 = threading.Thread(target=listen_sound)
+            t1.start()
 
         def greeting():
             self.ui.init.show()
@@ -277,30 +286,54 @@ class MainWindow(QMainWindow):
 
         def assistant(self):
             self.ui.init.hide()
-            asis = assist.output(self.ui.commandbar.text().lower())
-            print(asis)
-            try:
-                if type(asis[-1]) == list:
-                    self.ui.search.hide()
-                    self.ui.weather.show()
-                    self.ui.city.setText(f'{asis[-1][0]}, {asis[-1][1]}')
-                    self.ui.country.setText(time.strftime('%A, %d %B %Y'))
-                    self.ui.weather_icon.setPixmap(f'C:/Wolf/images/icons/weather/{asis[-1][4]}')
-                    self.ui.visibility.setText(f'Visibility: {asis[-1][-4][:-3]}.{asis[-1][-4][1]} km')
-                    self.ui.pressure.setText(f'Pressure: {asis[-1][-3]} hPa')
-                    self.ui.humidity.setText(f'Humidity: {asis[-1][-5]}%')
-                    self.ui.high_low.setText(f'Feels like {asis[-1][-2]}°C. {asis[-1][-1]}')
-                    self.ui.temp.setText(f'{asis[-1][2]}°')
-                    self.ui.weathercond.setText(asis[-1][5])
+            voice_input = assist.voice_input()
+            if voice_input[-1] == 'error':
+                self.ui.user_input.setText('')
+                self.ui.result.setText(f'Sorry, I didn\'t get that. Please try again')
+                assist.voice(f'Sorry, I didn\'t get that. Please try again')
+                pass
+            elif voice_input[-1] == 'maintenance':
+                self.ui.result.setText(f'Sorry, my voice recognition service is under maintenance right now.'
+                                       f'You can instead type your query on the command bar below.')
+                assist.voice(f'Sorry, my voice recognition service is under maintenance.')
+                pass
+            else:
+                if voice_input[-1] == 'play':
+                    self.ui.user_input.setText(f'search and play "{voice_input[0]}" on {voice_input[1]}')
+                    asis = assist.output(f'search and play "{voice_input[0]}" on {voice_input[1]}')
+                elif voice_input[-1] == 'search':
+                    self.ui.user_input.setText(f'search "{voice_input[0]} on {voice_input[1]}"')
+                    asis = assist.output(f'search "{voice_input[0]} on {voice_input[1]}"')
+                elif voice_input[-1] == 'note':
+                    self.ui.user_input.setText(f'make a new note "{voice_input[0]}"')
+                    asis = assist.output(f'make a new note "{voice_input[0]}"')
                 else:
+                    self.ui.user_input.setText(voice_input[0])
+                    asis = assist.output(voice_input[0])
+                try:
+                    if type(asis[-1]) == list:
+                        self.ui.search.hide()
+                        self.ui.weather.show()
+                        self.ui.city.setText(f'{asis[-1][0]}, {asis[-1][1]}')
+                        self.ui.country.setText(time.strftime('%A, %d %B %Y'))
+                        self.ui.weather_icon.setPixmap(f'C:/Wolf/images/icons/weather/{asis[-1][4]}')
+                        self.ui.visibility.setText(f'Visibility: {asis[-1][-4][:-3]}.{asis[-1][-4][1]} km')
+                        self.ui.pressure.setText(f'Pressure: {asis[-1][-3]} hPa')
+                        self.ui.humidity.setText(f'Humidity: {asis[-1][-5]}%')
+                        self.ui.high_low.setText(f'Feels like {asis[-1][-2]}°C. {asis[-1][-1]}')
+                        self.ui.temp.setText(f'{asis[-1][2]}°')
+                        self.ui.weathercond.setText(asis[-1][5])
+                    else:
+                        self.ui.weather.hide()
+                        self.ui.search.show()
+                        try:
+                            self.ui.result.setText(asis[-1])
+                        except:
+                            self.ui.result.setText(asis[-1][-1])
+                except:
+                    self.ui.init.show()
+                    self.ui.search.hide()
                     self.ui.weather.hide()
-                    self.ui.search.show()
-                    self.ui.user_input.setText(self.ui.commandbar.text())
-                    self.ui.result.setText(asis[-1])
-            except:
-                self.ui.init.show()
-                self.ui.search.hide()
-                self.ui.weather.hide()
 
         def assistant_novoice(self):
             self.ui.init.hide()
@@ -462,8 +495,8 @@ class MainWindow(QMainWindow):
         # is present with the microphone icon on the main window.
         self.ui.button_command.clicked.connect(lambda: assistant_novoice(self))
         self.ui.button_command.clicked.connect(lambda: print(self.ui.commandbar.text()))
+        self.ui.button_speak.clicked.connect(lambda: listen_sound_execute())
         self.ui.button_speak.clicked.connect(lambda: assistant(self))
-        self.ui.button_speak.clicked.connect(lambda: print('mic button pressed.'))
 
         # hiding the search and weather widget on launch, also the edit name bar
         self.ui.weather.hide()
