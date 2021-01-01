@@ -44,7 +44,7 @@ def day_now():
 
     final_format = f'Today is {dict_days[day]}, {day_today[2]} {dict_months[day_today[1]]} {day_today[0]}, {time_now[-2][:5]}'
     asis_format = f'Today is {dict_days[day]}, {day_today[2]} {dict_months[day_today[1]]} {day_today[0]}, {final_time_now}'
-    return final_format, asis_format
+    return asis_format, final_format
 
 
 # checking the user input. If counter > 3 then it will recognize that the user is trying to ask what is the
