@@ -18,7 +18,7 @@ their preffered background color, and their profile picture.
 5. Search the web (multiple search engines)
 6. Telling current weather of a city
 7. Telling jokes
-8. Voice commands
+8. Voice commands (WIP)
 9. User interface
 10. Play video on YouTube & music on YT Music based on user search
 
@@ -37,7 +37,7 @@ on the user's locale language. The same bug goes for giving description of someo
 
 ### Important Note
 
-If someone somehow finds this and wants to clone this repo, Gonpachiro only works on Windows. If you met the first requirement
+If someone somehow finds this and wants to clone this repo, Wolf only works on Windows. If you met the first requirement
 (you're using Windows), please move or copy the 'Wolf' folder to the C:/ drive (the C:/ itself, don't put it on any folder). 
 This program was made on Windows 10 and uses file modifications, 
 so all the files and folders necessary for this program to run is referenced to Windows 10. If you're using an older version,
@@ -51,12 +51,13 @@ WIP (ignore)
 - usr img on start -> DONE, 29th Dec 2020.
 - save user settings upon exit -> DONE, 30th Dec 2020.
 - threading (if can lol, gave up with the alarm); voice and gui work together -> pending.
-- open app -> ongoing; mandatory.
+- open app -> DONE, 31st Dec 2020
 - fix path -> DONE, 29th Dec 2020.
-- make list, note -> ongoing; mandatory.
+- make list, note -> list feature discarded (time isn't enough :<), note -> DONE, 31st Dec 2020
 - expand time feature (if can) -> pending.
 - make the bg color stays the same if ever the user changed the color -> DONE, 30th Dec 2020.
 - make the profile pic and name stays the same if ever the user changes those -> DONE, 29th Dec 2020, 30th Dec 2020.
-- save user's name object to a file and open in assistant file -> ongoing.
-- ATUR FILE WOI HADEH -> partly done.
+- save user's name to a file and open in assistant file -> DONE, 31st Dec 2020
+- ATUR FILE WOI HADEH -> DONE, 31st Dec 2020
+- Differentiate between text input and voice input -> Text input DONE, 31st Dec 2020; Voice input ongoing, mandatory, final task before this thing is finally done.
 ```
