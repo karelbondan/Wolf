@@ -28,9 +28,12 @@ import atexit
 import langsung
 import playsound
 import threading
+import ctypes
+import subprocess
+import signal
 
 # GUI file, includes the main interface template, which of course I made myself using the
-# PySide2 Designer program  came together with the installed module.
+# PySide2 Designer program came together with the installed module.
 from gui import Ui_MainWindow
 
 # Import functions to make the default window border and title bar
@@ -73,6 +76,10 @@ background_colors = {
     'turqoise': 'background-color: qlineargradient(spread:pad, x1:0, y1:0.455, x2:1, y2:0.733, stop:0 rgba(19, 106, 138, 255), stop:1 rgba(38, 120, 113, 255));',
     'vine': 'background-color: qlineargradient(spread:pad, x1:0, y1:0.455, x2:1, y2:0.773, stop:0 rgba(0, 191, 143, 255), stop:1 rgba(0, 21, 16, 255));', }
 
+# telling Windows that this is a different process so the icon can be set
+myappid = u'mycompany.myproduct.subproduct.version' # arbitrary string
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
 
 # the main user interface class
 class MainWindow(QMainWindow):
@@ -86,6 +93,18 @@ class MainWindow(QMainWindow):
         self.stylesheet = 'turqoise'
         self.name = socket.gethostname()
         self.tip = True
+        self.setWindowIcon(QtGui.QIcon('C:/Wolf/bin/icon.ico'))
+
+        def always_listen():
+            listen = subprocess.Popen('python backgroundtask.py', shell=True, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+            return listen
+
+        def kill_child(child_pid):
+            proc_pid = child_pid.pid
+            if proc_pid is None:
+                pass
+            else:
+                child_pid.send_signal(signal.CTRL_BREAK_EVENT)
 
         def listen_sound():
             playsound.playsound('C:/Wolf/bin/listening.wav')
@@ -121,6 +140,7 @@ class MainWindow(QMainWindow):
             self.ui.all_content.setStyleSheet(background_colors[stylename])
             self.stylesheet = stylename
             stylesheet = self.stylesheet
+            save_config(stylesheet=self.stylesheet, name=self.name, tip=self.tip)
             print(f'Success! Background color set to {stylename}')
             print(self.stylesheet)
 
@@ -303,7 +323,7 @@ class MainWindow(QMainWindow):
                     asis = assist.output(f'search and play "{voice_input[0]}" on {voice_input[1]}')
                 elif voice_input[-1] == 'search':
                     self.ui.user_input.setText(f'search "{voice_input[0]} on {voice_input[1]}"')
-                    asis = assist.output(f'search "{voice_input[0]} on {voice_input[1]}"')
+                    asis = assist.output(f'search "{voice_input[0]}" on {voice_input[1]}')
                 elif voice_input[-1] == 'note':
                     self.ui.user_input.setText(f'make a new note "{voice_input[0]}"')
                     asis = assist.output(f'make a new note "{voice_input[0]}"')
@@ -497,6 +517,8 @@ class MainWindow(QMainWindow):
         self.ui.button_command.clicked.connect(lambda: print(self.ui.commandbar.text()))
         self.ui.button_speak.clicked.connect(lambda: listen_sound_execute())
         self.ui.button_speak.clicked.connect(lambda: assistant(self))
+        child_process_listen = always_listen()
+        self.ui.button_close_app.clicked.connect(lambda: kill_child(child_process_listen))
 
         # hiding the search and weather widget on launch, also the edit name bar
         self.ui.weather.hide()
