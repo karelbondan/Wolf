@@ -48,7 +48,7 @@ preposition = ['in', 'on', 'at']
 misc = ['a', 'the', 'define', 'what', 'is', 'wikipedia', 'wiki']
 predictions = ['search', 'for', 'what', 'is', 'define', 'who', 'in', 'on', 'at', 'google', 'bing', 'yahoo', 'youtube',
                'open', 'and', 'duckduckgo', 'play', 'stack', 'overflow', 'stackoverflow', 'reddit']
-prediction_2 = ['open']
+prediction_2 = ['play', 'search']
 yt_case = ['youtube', 'yt', 'music', 'stack', 'overflow', 'stackoverflow', 'reddit']
 websites = ['youtube', 'yt', 'music', 'stack', 'overflow', 'stackoverflow', 'reddit', 'bing', 'google', 'yahoo',
             'duckduckgo']
@@ -64,6 +64,11 @@ after_search = {'youtube': 'Enjoy watching!', 'youtube music': 'Enjoy listening 
                 'stackoverflow': 'Here are the result from Stack Overflow.',
                 'reddit':'Here are the result from Reddit.'}
 
+predictions_doing_tasks = ['assist', 'what', 'can', 'you', 'do', 'wat', 'u', 'me', 'how']
+predictions_telling_name = ['wat', 'what', 'ur', 'your', 'name']
+predictions_telling_username = ['wat', 'what', 'my', 'name']
+predictions_telling_jokes = ['tell', 'joke', 'jokes', 'entertain', 'me', 'amuse', 'make', 'laugh']
+
 # dictionary containing the path of the commonly used applications on Windows.
 applications = {'word': "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
                 'powerpoint': "C:\\Program Files\\Microsoft Office\\root\Office16\\POWERPNT.EXE",
@@ -74,7 +79,13 @@ applications = {'word': "C:\\Program Files\\Microsoft Office\\root\\Office16\\WI
                 'pycharm': "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2020.2.3\\bin\\pycharm64.exe",
                 'notepad': 'C:\\Windows\\system32\\notepad.exe',
                 'edge': "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-                'explorer': 'C:\\Windows\\explorer.exe'}
+                'explorer': 'C:\\Windows\\explorer.exe',
+                'youtube': 'https://www.youtube.com',
+                'google': 'https://www.google.com',
+                'bing': 'https://www.bing.com',
+                'yahoo': 'https://www.yahoo.com',
+                'reddit': 'https://www.reddit.com',
+                'duckduckgo': 'https://www.duckduckgo.com'}
 
 # the sentence the assistant will say after it has found a result.
 final_words = ['You can read more on the results I\'ve shown', 'Here are the results from the web',
@@ -85,6 +96,18 @@ final_words = ['You can read more on the results I\'ve shown', 'Here are the res
 # of the same thing the assistant says after finding the result. This variable will then
 # be passed onto the gTTS parameter which is the text the assistant going to say.
 randomize = random.choice(final_words)
+
+# randomize the response when user asks Wolf how's it feeling today.
+def randomize_response():
+    response_sequence = ['I\'m feeling very fine today! Thank you for asking.',
+                         'I\'m feeling really generous today. Gotta find some sheeps to play with!',
+                         'You know, sometimes I feel down. Sheeps are my best friend to vent out.',
+                         'Woof woof woof woof woof!', 'I\'m feeling eager to help you. How can I help?',
+                         'I really wish I could play outside with you.',
+                         'Woof to the left, woof to the right! Oh... sorry.. I\'m feeling excited today!']
+
+    response = random.choice(response_sequence)
+    return response
 
 # from this point on, ignore what has been written below. I was gonna make a text to integer or float to act as a
 # simple calculator, but then I found the wolfram module which helps reducing the time of making this a lot.
