@@ -6,14 +6,14 @@ import requests
 from gtts import gTTS
 
 # opening the config.ini which has the API key in it for the openweather API.
-config_file = 'config.ini'
+config_file = 'bin/config.ini'
 config = ConfigParser()
 config.read(config_file)
 api_key = config['api_key']['key']
 
 # opening the city database list for further checking.
 # this city database was made by anuveyatsu. Their github repo link is https://github.com/datasets/world-cities
-with open("cities.csv", 'r', encoding='utf8') as f:
+with open("bin/cities.csv", 'r', encoding='utf8') as f:
     file = f.read()
 data = file.split('\n')
 cities_list = []  # this list is where the cities are going to be stored.
