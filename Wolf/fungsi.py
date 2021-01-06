@@ -1,6 +1,7 @@
 from main import *
 
-
+# the function to drag the window around when pressed on the title bar, and to make the
+# minimize and close button works.
 class UIFunctions(MainWindow):
     def remove_title(self):
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
