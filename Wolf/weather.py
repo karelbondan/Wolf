@@ -22,7 +22,8 @@ for i in range(len(data) - 1):
     cities_list.append(city)
 
 
-# for the assistant to be able to give a respond
+# for the assistant to be able to give a respond. didn't use the voice in the assistant
+# function to avoid errors and circular imports.
 def voice_output_weather(answer):
     audiocreated = gTTS(text=answer, lang='en', slow=False)
     a = random.randint(1, 999)
@@ -36,8 +37,14 @@ def voice_output_weather(answer):
 # function that calls the API and searches for the current weather for the city.
 # the default city is Jakarta in case the user doesn't specify a city.
 def weather(city):
+
+    # since this function is called from the assistant library and the langsung library
     cur_city = city[1]
+
+    # requesting the data from the API
     res = requests.get(url=f'https://api.openweathermap.org/data/2.5/weather?q={cur_city}&appid={api_key}')
+
+    # if there is a response
     if res:
         file = res.json()
         city = file['name']
