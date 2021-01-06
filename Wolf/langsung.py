@@ -1,3 +1,8 @@
+# all statements and functions in this library is literally the same as in assistant file, but without the voice output.
+# i tried to mimic google assistant's behavior where if user isn't saying anything and just type it into the search bar,
+# google will keep quiet and just directly show the result. this library here is the exact same thing as that.
+# less comments will be put here as you can read the explanation already on the assistant library.
+
 import os
 import re
 import socket
@@ -10,6 +15,7 @@ import checking as num
 import day
 import jokes as jk
 import notes
+import screenshot
 import weather as wt
 import apps
 import youtube
@@ -51,8 +57,12 @@ def read_config():
 
 # basic tasks and questions
 def basic_tasks(usr_input):
+    if ('hi' or 'hello') in usr_input:
+        text = 'Hello, how can I help you today?'
+        print(text)
+        return text
 
-    if 'what can you do' in usr_input or 'how can you assist me' in usr_input:
+    elif 'what can you do' in usr_input or 'how can you assist me' in usr_input:
         text = f"Hello {name}. I can search the web, open Windows's pre-installed desktop apps, " \
                "make a note for you, telling the weather, and some few more. You can read more on my documentation."
         print(text)  # will return the text to be displayed on the GUI after it's finished.
@@ -90,7 +100,7 @@ def output(userinput):
     rawinput = userinput
 
     try:
-        # I separated the basic_tasks and the search function to ease the management of the codes
+        # separated the basic_tasks and the search function to ease the management of the codes
         # it was confusing as heck before I split them into their own respective functions.
         init = basic_tasks(userinput)
         if init != '':
@@ -98,7 +108,7 @@ def output(userinput):
         else:
             pass
 
-        # I also separated the weather input so that it's easier to manage
+        # separated the weather input so it's easier to manage
         weather_check = wt.check_userinput(userinput)
         if weather_check[0] >= 3:
             this_list = wt.weather(weather_check)
@@ -109,7 +119,7 @@ def output(userinput):
         else:
             pass
 
-        # also the time
+        # separated the time function
         check_time = day.check_userinput(userinput)
         if type(check_time) == str:
             return None, check_time
@@ -120,6 +130,7 @@ def output(userinput):
             else:
                 pass
 
+        # make/delete notes check
         check_note = notes.check_userinput(userinput)
         if check_note[0] >= 3:
             print(check_note)
@@ -136,10 +147,17 @@ def output(userinput):
         else:
             pass
 
+        # open apps check
         open_app = apps.check_userinput(userinput)
         if open_app[0] >= 2:
             os.startfile(num.applications[open_app[-1]])
             return None, f'Starting {open_app[-1]}...'
+
+        # screenshot check
+        snap = screenshot.check_userinput(userinput)
+        if snap >= 3:
+            shot = screenshot.main()
+            return None, shot[-1]
 
         # splitting the input to make it easier to manage.
         userinput = userinput.split()
@@ -329,9 +347,12 @@ def output(userinput):
                         else:
                             continue
                     browse = num.searches[web]
+
+                # __ne__ is to delete all occurring things that are present in the list if it's present in the
+                # prediction list, this is why the for loop is necessary
                 for prediction in penelusuran:
                     if prediction in num.predictions:
-                        penelusuran = list(filter((prediction).__ne__, penelusuran))
+                        penelusuran = list(filter(prediction.__ne__, penelusuran))
                     else:
                         pass
 
@@ -349,8 +370,6 @@ def output(userinput):
                     print(penelusuran)
                     return None, f'Okay, searching "{ada_pencarian}" on {web}'
 
-
-
         else:
             if 'google' in rawinput:
                 rawinput.replace('google', '')
@@ -359,6 +378,7 @@ def output(userinput):
         pass
 
 
+# debugging
 """
 time.sleep(1)
 while 1:
