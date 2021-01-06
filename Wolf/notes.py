@@ -36,14 +36,23 @@ def delete_note():
 
 # function to make and view note
 def note(input_check_result, input='non'):
+    # regex to find the note wrapped in double quote marks
     catatan_note = re.findall(r'\s*(".+")\s*', input)
+
+    # replace the double quote marks with nothing since they're included in the search
     try:
         catatan_note = catatan_note[0].replace('"', '')
+
+    # if doesn't find any double quote marks then pass
     except:
         pass
+
+    # removing things in prediction if it's in input. __ne__ is to delete all occurring
+    # things that are present in the list if it's present in the prediction list,
+    # this is why the for loop is necessary
     for prediction in input:
         if prediction in prediction:
-            input = list(filter((prediction).__ne__, input))
+            input = list(filter(prediction.__ne__, input))
         else:
             pass
     print(catatan_note)
@@ -51,18 +60,19 @@ def note(input_check_result, input='non'):
     ada_catatan = catatan_exist()
     print(f'{ada_catatan} aaaaa')
 
+    # if the check result is view then it views the note
     if input_check_result[-1] == 'view':
         try:
-            user_note = open('usernote.notes', 'r', encoding='utf-8')
-            user_note = user_note.read()
+            with open('usernote.notes', 'r', encoding='utf-8') as user_note:
+                user_note = user_note.read()
             return None, f'Here is your note:\n\n{user_note}'
         except:
             return None, f'No notes yet, you can create it by saying \'make a new note\' when Wolf prompts' \
                          f' the command or by typing it in the command bar followed by the note wrapped in double' \
                          f' quotation marks -> Make a new note "Hello World!"'
 
+    # if the check result is make then it'll make a new note and overwrites the already existing one
     elif input_check_result[-1] == 'make':
-        print('hi')
         user_note = open('usernote.notes', 'w', encoding='utf-8')
         if catatan_note == []:
             return None, f'Please specify your note by using double quotation marks.' \
@@ -105,6 +115,7 @@ def check_userinput(input):
 
     return counter, command
 
+# debugging
 """
 while True:
     usrinput = input('enter ur search query: ')
