@@ -1,3 +1,7 @@
+# this file is generated automatically by the Qt Designer app. It basically has those lines
+# and lines of codes to place the objects such as the buttons, text, pictures, and so on on
+# the set place by me. set on the Designer app.
+
 # -*- coding: utf-8 -*-
 
 ################################################################################
@@ -846,7 +850,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Wolf", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Wolf - Assistant", None))
 #if QT_CONFIG(tooltip)
         self.button_minimize_app.setToolTip(QCoreApplication.translate("MainWindow", u"Minimize", None))
 #endif // QT_CONFIG(tooltip)
@@ -911,7 +915,7 @@ class Ui_MainWindow(object):
         self.arrow_serongkanan.setText("")
         self.tip_3_bottomright.setText(QCoreApplication.translate("MainWindow", u"Click this button to see the documentation of Wolf", None))
         self.arrow_upleft.setText("")
-        self.tip_4_buttomleft.setText(QCoreApplication.translate("MainWindow", u"Click this button to change your name. Gonpachiro will call you by this name too", None))
+        self.tip_4_buttomleft.setText(QCoreApplication.translate("MainWindow", u"Click this button to change your name. Wolf will call you by this name too", None))
         self.button_show_tips.setText(QCoreApplication.translate("MainWindow", u"Show tips", None))
         self.button_hide_tips.setText(QCoreApplication.translate("MainWindow", u"Hide tips", None))
         self.madeby.setText(QCoreApplication.translate("MainWindow", u"Made by", None))
