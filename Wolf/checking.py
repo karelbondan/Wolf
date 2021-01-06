@@ -55,14 +55,14 @@ websites = ['youtube', 'yt', 'music', 'stack', 'overflow', 'stackoverflow', 'red
 searches = {'youtube': {'music': 'https://music.youtube.com/search?q=', 'youtube': 'https://www.youtube.com/search?q='},
             'bing': 'https://www.bing.com/search?q=', 'yahoo': 'https://search.yahoo.com/search?q=',
             'google': 'https://www.google.com/search?q=', 'duckduckgo': 'https://duckduckgo.com/?q=',
-            'stackoverflow':'https://www.stackoverflow.com/search?q=', 'reddit':'https://www.reddit.com/search/?q='}
+            'stackoverflow': 'https://www.stackoverflow.com/search?q=', 'reddit': 'https://www.reddit.com/search/?q='}
 
 after_search = {'youtube': 'Enjoy watching!', 'youtube music': 'Enjoy listening to the rythm!',
                 'google': 'Here are the results from Google.', 'bing': 'Here are the results from Bing.',
                 'yahoo': 'Here are the results from Yahoo.',
                 'duckduckgo': 'Here are the results from DuckDuckGo.',
                 'stackoverflow': 'Here are the result from Stack Overflow.',
-                'reddit':'Here are the result from Reddit.'}
+                'reddit': 'Here are the result from Reddit.'}
 
 predictions_doing_tasks = ['assist', 'what', 'can', 'you', 'do', 'wat', 'u', 'me', 'how']
 predictions_telling_name = ['wat', 'what', 'ur', 'your', 'name']
@@ -71,8 +71,8 @@ predictions_telling_jokes = ['tell', 'joke', 'jokes', 'entertain', 'me', 'amuse'
 
 # dictionary containing the path of the commonly used applications on Windows.
 applications = {'word': "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
-                'powerpoint': "C:\\Program Files\\Microsoft Office\\root\Office16\\POWERPNT.EXE",
-                'chrome': "C:\\Program Files (x86)\\Google\Chrome\\Application\\chrome.exe",
+                'powerpoint': "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
+                'chrome': "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
                 'firefox': "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
                 'excel': "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
                 'photoshop': "C:\\Program Files\\Adobe\\Adobe Photoshop CC 2018\\Photoshop.exe",
@@ -85,7 +85,9 @@ applications = {'word': "C:\\Program Files\\Microsoft Office\\root\\Office16\\WI
                 'bing': 'https://www.bing.com',
                 'yahoo': 'https://www.yahoo.com',
                 'reddit': 'https://www.reddit.com',
-                'duckduckgo': 'https://www.duckduckgo.com'}
+                'duckduckgo': 'https://www.duckduckgo.com',
+                'discord': f'{os.environ["USERPROFILE"]}\\AppData\\Local\\Discord\\app-0.0.309\\Discord.exe',
+                'steam':'D:\\Program Files (x86)\\Steam\\Steam.exe'}
 
 # the sentence the assistant will say after it has found a result.
 final_words = ['You can read more on the results I\'ve shown', 'Here are the results from the web',
@@ -96,6 +98,7 @@ final_words = ['You can read more on the results I\'ve shown', 'Here are the res
 # of the same thing the assistant says after finding the result. This variable will then
 # be passed onto the gTTS parameter which is the text the assistant going to say.
 randomize = random.choice(final_words)
+
 
 # randomize the response when user asks Wolf how's it feeling today.
 def randomize_response():
@@ -108,6 +111,7 @@ def randomize_response():
 
     response = random.choice(response_sequence)
     return response
+
 
 # from this point on, ignore what has been written below. I was gonna make a text to integer or float to act as a
 # simple calculator, but then I found the wolfram module which helps reducing the time of making this a lot.
