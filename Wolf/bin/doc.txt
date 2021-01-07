@@ -1,1 +1,423 @@
-Awooooo!!!
+.###/ ################  ####  ##############%%%%%%%%%%%                       
+####  ####  ##*  ####/ ####  ###############%%/   %%%%%                       
+####  #### #####  ### ####  ########### ###,   %%%% .%%                       
+#### #### ###### ###  ###* ########### .####  #%%%% %%%                       
+#### ### ######  ##  #### ##  #.#####. ####   %%%%  .                         
+###( ##  ##*###  ## ####   #######(   .#### .#%%%%%%%%%%%                     
+###* #  ##  ###  #  ###  #####   ###  #### #%%%%%%(.                          
+###* # ###  ###  # #### #####    ###  ####  *%%%%%# %%%                       
+###(   ##   ###/   ###  ####  # #### ####(  %%%% %%% %%                       
+####  ##, # ####  #### *###  #  #### ####  /%%%* .%%  %                       
+####  ##  #  ###  ###   ###    ####  ####  #%%%  ,%%  %                       
+ ###*##* ##  ######## #  ########    ####  #%%%  %%  %%                       
+ ######  ### #######  ####      *####     (#%%, %%  %%%                       
+  ##### ####  ###### ####################  #%%%%  %%%%%                       
+   ###. ##### #####  ######################    %%%%%%%%                       
+ ##    ####### .###  #######################%%%%%%%%%%%
+
+
+Hello! Welcome to the documentation of Wolf, the virtual 
+assistant for Windows.
+
+As a start, this program was made by Karel Bondan as the 
+final project for the first semester.
+
+=======================================================
+		    What is Wolf?
+=======================================================
+Wolf is a virtual assistant program written in Python,  
+Wolf features user interface. User can customize some 
+of Wolf's features such as their name, their preffered 
+background color, and their profile picture.
+
+=======================================================
+		      Features
+=======================================================
+- Define something
+- Give short description of known people
+- Make a note
+- Open and close user-installed apps
+- Search the web (multiple search engines)
+- Telling current weather of a city
+- Telling jokes
+- Voice commands
+- User interface
+- Play video on YouTube & music on YT Music based on user
+  search
+- Always listen in background, user can call Wolf
+  by using 'wake up phrase'(see below for the wake up calls)
+
+=======================================================
+		    Current state
+=======================================================
+This project is finished for now. This thing has chipped
+away my sanity long enough, time to say goodbye to it. I
+don't plan on adding features as of now (might change my
+mind later; If ever I don't have anything to do, maybe 
+I'll try implementing more stuff into Wolf).
+
+=======================================================
+			 Bugs
+=======================================================
+- Giving description of someone sometimes uses user's
+  locale language.
+
+- Before Wolf has finished talking, the GUI will be
+  frozen.
+
+=======================================================
+		    Important Note
+=======================================================
+Please install some depedencies if you haven't (view the
+README.md file on the repo for quick link access) :
+
+- PyAudio
+- playsound
+- gTTS
+- SpeechRecognition
+- PyQt5
+- PySide2
+- opencv
+- Pillow
+- beautifulsoup4
+- wolframalpha
+- pygetwindow
+- App Fonts
+  (https://drive.google.com/file/d/1h_c5Ypzeo20X1mUfyXXnFgzDQKQ82MLE/view)
+  
+If you've met the first requirement (you're using Windows)
+and have installed the depedencies, please move or copy 
+the 'Wolf' folder to the C:/ drive (the C:/ itself, don't 
+put it on any folder). This program was made on Windows 10 
+and uses file modifications, so all the files and folders 
+necessary for this program to run is referenced to Windows 
+10. If you're using an older version, feel free to try it. 
+Important note is that I haven't tested this on the older 
+version of Windows, so the program may not work correctly 
+(especially on first launch), you may get blank user 
+profile image on the top right of the GUI and on the user 
+settings page.
+
+ps. You can always change your profile picture and Wolf
+    will remember your changes. 
+
+
+=======================================================
+		Graphical User Interface
+=======================================================
+Wolf features a graphical user interface, or simply GUI.
+It has some parts:
+
+-	The Command Bar
+	The Command Bar is the longest bar on the bottom of
+	the app. There, you can type commands so Wolf can do
+	what you want. It is connected to the Search Button.
+
+-	The Search Button
+	The Search Button is the typing command button. If
+	you're not in the mood to say a word, you can use 
+	this feature instead. Wolf won't say anything if you 
+	use this command.
+	
+-	The Microphone Button
+	The Microphone Button is the voice command. You'll
+	be prompted to say a command and Wolf will do that
+	command for you. Wolf will also say things,
+	different from the type command.
+
+-	The User Profile Button
+	This button is where you'll have the freedom to
+	customize the GUI.
+	
+-	The Home Button
+	To go back to the search page so you can ask Wolf
+	other things.
+
+
+The user profile page has some customizations:
+
+-	Change your name
+	Wolf will immediately know that you've changed your
+	name. The next time you ask it your name, it will
+	recognize you as your new name.
+	
+-	Change your profile picture
+	You can change your profile picture by clicking on
+	the big circle above your name. The supported file
+	extensions are JPEG, JPG, PNG, and BMP.
+	
+-	Change the color scheme
+	19 color schemes are available on the user profile
+	page. Feel free to choose whatever that is to your
+	liking.
+	
+-	Show/hide the tips
+	By default, the tips are shown to you. If you're
+	satisfied enough with the tips, you can hide them
+	by clicking the Hide Tips button on the top left
+	corner of the page. To show the tips again, press
+	the Show Tips button on the exact same location as
+	the Hide Tips button. Depending on your choice,
+	Wolf will hide/show the tips on next launch.
+	
+
+=======================================================
+		    Calling Wolf
+=======================================================
+With its background listening functionality, you can
+always call wolf when you're lazy enough to use your
+computer. The wake up calls are:
+
+		       'woof'
+		       'wolf'
+		     'hey wolf'
+		     'woof woof'
+		     'wolf wolf'
+
+When you have successfully called Wolf, a short 'ding!'
+will be heard indicating that Wolf is ready to accept
+commands from you. It may take some time before Wolf
+finally response. Give 1 or 2 seconds. If Wolf doesn't
+respond, you may try calling it again (but don't spam-
+call it, it'll break ;w;)
+
+=======================================================
+		      Commands
+=======================================================
+As explained above, Wolf has some features as of now.
+
+-	=== Greetings ===
+
+	Wolf can greet you, and tell you what it can do.
+	Simply type, or say:
+	
+	>>> 'what can you do?'
+	>>> 'what is your name?'
+	>>> 'how do you call me?'
+	>>> 'how are you today'
+	
+
+-	=== Jokes ===
+
+	If ever you feel bored, you can ask for Wolf to tell
+	you a joke, by saying (or typing):
+	
+	>>> 'tell me a joke'
+	
+	Yeah I know, dad jokes... but it's still a joke.
+	At least show some appreciation to it. Wolf has tried
+	its best :<
+	
+	
+-	=== Time ===
+	
+	Wolf can tell you the current day and time. You can use
+	this function by typing, or saying:
+	
+	>>> 'what time is it?'
+	>>> 'what day is it?' 
+	
+	Both commands will result in the same result. Wolf will
+	tell you the current time, day, date, month and year.
+
+	
+-	=== Weather ===
+
+	Wolf can tell you the current weather of the city
+	you'll asked it the info about. For instance, you can
+	say this phrase to display the current weather of
+	Semarang, Indonesia:
+	
+	>>> 'what is the current weather of semarang?'
+	
+	or 
+	
+	>>> 'current weather of semarang'
+	
+	It will take some time for Wolf to gather the info
+	then tell you the description of the current weather
+	of Semarang, Indonesia. After Wolf has finished
+	talking, a graphical image can text can be seen in the 
+	user interface. Try it out!
+	
+	
+-	=== Calculation ===
+	
+	Wolf can count for you. You can ask any simple
+	calculation to Wolf by saying (or typing):
+	
+	>>> 'what is (number) (operand) (number)?'
+	
+	It will take a short time before Wolf will finally
+	give you the answer. 
+	
+	
+-	=== Open and close apps ===
+
+	Simply type or say:
+	
+	>>> 'open (application name)'
+	
+	to open an app. For example:
+	
+	>>> 'open discord'
+	
+	will open Discord if 
+	it's installed in the default install location
+	
+	or 
+	
+	>>> 'close (application name)'
+	
+	to close a currently
+	running app. For example:
+	
+	>>> 'close microsoft office word'
+	
+	will close the Word application if it's
+	currently running.
+	
+	
+-	=== Make a note ===
+
+	Wolf have an in-built note function that can write,
+	view, and delete note both with typing and voice 
+	command. By typing, the command is:
+	
+	>>> 'make a new note "your note"'
+		
+	the double quotes must present in order for Wolf to
+	successfully make a new note for you.
+	
+	by voice command, you can say:
+	
+	>>> 'make a new note'
+	
+	Wolf will then prompt you to say what the note will
+	be. Just say your note to Wolf when it asks you to
+	speak.
+	
+	To view a note, you can simply type, or say:
+	
+	>>> 'view my note' or 'open my note'
+	
+	And to delete the note, you can type or say:
+	
+	>>> 'delete my note'
+	
+
+-	=== Screenshot ===
+
+	Wolf can take a screenshot for you. By typing, just type
+	or say one of these below:
+	
+	>>> 'take a screenshot'
+	>>> 'screenshot my screen'
+	>>> 'screenshot the screen'
+	
+	and Wolf will take a screenshot of the current screen for
+	you. It will always hide itself so no one will see it.
+	shhhh...
+
+
+-	=== Define something ===
+
+	Wolf can define the meaning of a word or telling you
+	who a person is. To ask for a word's meaning, type or
+	say:
+	
+	>>> 'define (word)'
+	>>> 'what is (word)'
+	>>> 'who is (person)'
+	
+	After Wolf has finished talking, the phrase its just said
+	will be displayed on the main app. The thing to remember 
+	is that sometimes, Wolf can say inaudible words. It 
+	means that Wolf is telling something in your region's 
+	locale language. For instance, sometimes Wolf will tell 
+	you the description of someone in Indonesian if you're 
+	currently in Indonesia.
+	
+	
+-	=== Web searches ===
+
+	Wolf can automate web search result. Some search engines
+	is implemented in Wolf so that you can use your favorite
+	search engine to do a search. Currently, the supported 
+	search engines are:
+	
+	- Google
+	- Bing
+	- Yahoo
+	- Duck Duck Go
+	- Reddit
+	- Stack Overflow
+	- YouTube
+	- YouTube Music
+	
+	By typing, you can type:
+	
+	>>> 'search "(your search query)" on (search engine)'
+	
+	Important note is that the double quotation marks must be
+	present just like when you command Wolf to make a new note
+	by typing. The example is:
+	
+	>>> 'search "cats and dogs" on yahoo'
+	
+	Wolf will take you to the Yahoo search page with your search
+	query already entered automatically.
+	
+	By voice command, you can say:
+	
+	>>> 'search on (search engine)'
+	
+	It will take some time before Wolf will prompt you for a search
+	query. A 'ding!' sound can be heard after Wolf has finished
+	talking. It is the indicator that it is ready to listen to your
+	search query. Don't take too long tho...
+	pssst... Wolf is an impatience being...
+	In this state, Wolf will try to always listen everytime it
+	fails to get the input. If you want to cancel this process, just
+	say anything to Wolf. Wolf will still take you to the website, but
+	at least it's quiet now :D
+	
+	
+	=== A special case for YouTube and YouTube Music ===
+	
+	For YouTube and YouTube Music searches, you can also tell wolf
+	to directly play a video. By typing, you can type:
+	
+	>>> 'play on youtube/yt "(what video do you want Wolf to play?)"'
+	>>> 'search "(video)" and play it on YouTube'
+	
+	As you can tell, you have to include the double quotation marks.
+	Here is the example:
+	
+	>>> 'play on yt "dream vs 4 hunters finale rematch"'
+	>>> 'search "dream cheated 1.16 speedrun" and play on yt'
+	
+	The same command goes to YouTube Music. Just add music after the
+	word 'youtube' or 'yt'. Here is the example:
+	
+	>>> 'play "and so we fall the stupendium" on yt music'
+	>>> 'search and play on youttube music "won't stop rocking"'
+	
+	
+	By voice command, the same process goes like above but you can
+	add an additional 'play' to directly play a music on YouTube Music
+	or a video on YouTube. Here is the example:
+	
+	>>> 'search and play on youtube'
+	>>> 'play on youtube'
+	>>> 'search and play on youtube music'
+	>>> 'play on yt music'
+	
+	After some time, Wolf will prompt you the search query, just say
+	anything you want and Wolf will play a video based on your search
+	query.
+	
+
+=======================================================
+  End of documentation. Thank you for trying out Wolf!
+=======================================================
