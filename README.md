@@ -35,8 +35,6 @@ If ever I don't have anything to do, maybe I'll try implementing more stuff into
   
 - Before Wolf has finished talking, the GUI will be frozen.
 
-- If you call Wolf using the wake up call, it'll sometimes prompt the user to command twice after the first command has been executed.
-
 ### Important Note
 
 If someone somehow finds this and wants to clone this repo, Wolf only works on Windows and you need to install some depedencies if you haven't:
@@ -50,6 +48,8 @@ If someone somehow finds this and wants to clone this repo, Wolf only works on W
 - [Pillow](https://pypi.org/project/Pillow/)
 - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
 - [wolframalpha](https://pypi.org/project/wolframalpha/)
+- [pygetwindow](https://pypi.org/project/PyGetWindow/)
+- [App Fonts](https://drive.google.com/file/d/1h_c5Ypzeo20X1mUfyXXnFgzDQKQ82MLE/view?usp=sharing) (Please install all fonts that are in this archive)
 
 If you've met the first requirement (you're using Windows) and have installed the depedencies, please move or copy the 'Wolf'
 folder to the C:/ drive (the C:/ itself, don't put it on any folder). This program was made on Windows 10 and uses file modifications, 
