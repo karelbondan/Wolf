@@ -6,6 +6,7 @@
 import os
 import re
 import socket
+import pygetwindow
 import time
 import webbrowser
 import requests
@@ -19,6 +20,7 @@ import screenshot
 import weather as wt
 import apps
 import youtube
+import system
 
 # dict to store user's name later on.
 user_config = {}
@@ -28,6 +30,7 @@ destination_path = f'C:\\Wolf\\users'
 
 # the initial variable and user's default name.
 name = socket.gethostname()
+
 
 # function to get user's name.
 def read_config():
@@ -149,15 +152,46 @@ def output(userinput):
 
         # open apps check
         open_app = apps.check_userinput(userinput)
-        if open_app[0] >= 2:
-            os.startfile(num.applications[open_app[-1]])
-            return None, f'Starting {open_app[-1]}...'
+        if open_app[0] >= 3:
+            if open_app[-1] == 'open':
+                try:
+                    os.startfile(num.applications[open_app[1]])
+                    return None, f'Starting {open_app[1].capitalize()}...'
+
+                except KeyError as err:
+                    print(err)
+                    return None, f'App not supported yet'
+
+            elif open_app[-1] == 'close':
+                dbl_backslash = '\\'
+                app = num.applications[open_app[1]].rfind(dbl_backslash)
+
+                try:
+                    kill = os.system(
+                        f'TASKKILL /F /IM {num.applications[open_app[1]][app:].replace(dbl_backslash, "")}')
+                    if kill == 128:
+                        raise apps.AppNotFoundError(f'{open_app[1]}')
+                    if open_app[1] == 'explorer':
+                        os.startfile('explorer.exe')
+                    return None, f'Closing {open_app[1].capitalize()}...'
+
+                except apps.AppNotFoundError as err:
+                    print(err)
+                    return None, f'{open_app[1].capitalize()} is not running. You can start it by typing "start {open_app[1]}"'
 
         # screenshot check
         snap = screenshot.check_userinput(userinput)
         if snap >= 3:
             shot = screenshot.main()
             return None, shot[-1]
+
+        # system check (for shut down and restart)
+        sys_check = system.check_input(userinput)
+        if sys_check[0] >= 3:
+            if sys_check[-1] == 'shutdown':
+                return os.system('shutdown /s /t 5'), f'Shutting down system in 5 seconds...'
+            elif sys_check[-1] == 'restart':
+                return os.system('shutdown /r /t 5'), f'Restarting system in 5 seconds...'
 
         # splitting the input to make it easier to manage.
         userinput = userinput.split()
