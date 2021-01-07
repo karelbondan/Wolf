@@ -8,6 +8,8 @@ import re
 from gtts import gTTS
 import playsound
 import os
+
+import system
 import weather as wt
 import string
 import random
@@ -236,9 +238,45 @@ def output(userinput):
 
         # and the apps. very limited atm
         open_app = apps.check_userinput(userinput)
-        if open_app[0] >= 2:
-            os.startfile(num.applications[open_app[-1]])
-            return voice(f'Starting {open_app[-1]}'), f'Starting {open_app[-1]}...'
+        if open_app[0] >= 3:
+            if open_app[-1] == 'open':
+                try:
+                    os.startfile(num.applications[open_app[1]])
+                    return voice(f'Starting {open_app[1]}'), f'Starting {open_app[1].capitalize()}...'
+
+                except KeyError as err:
+                    print(err)
+                    return voice("App is not supported yet"), f'App is not supported yet'
+
+            elif open_app[-1] == 'close':
+                dbl_backslash = '\\'
+                app = num.applications[open_app[1]].rfind(dbl_backslash)
+
+                try:
+                    kill = os.system(
+                        f'TASKKILL /F /IM {num.applications[open_app[1]][app:].replace(dbl_backslash, "")}')
+                    if kill == 128:
+                        raise apps.AppNotFoundError(f'{open_app[1]}')
+                    if open_app[1] == 'explorer':
+                        os.startfile('explorer.exe')
+                    return voice(f'Closing {open_app[1]}'), f'Closing {open_app[1].capitalize()}...'
+
+                except apps.AppNotFoundError as err:
+                    print(err)
+                    return voice(f'{open_app[1]} is not running. See the tip for more information'),\
+                           f'{open_app[1].capitalize()} is not running. You can start it by saying "start {open_app[1]}"'
+
+        # system check (for shut down and restart)
+        sys_check = system.check_input(userinput)
+        if sys_check[0] >= 3:
+
+            if sys_check[-1] == 'shutdown':
+                return voice(f'Okay, the system will shut down in 5 seconds'),\
+                       os.system('shutdown /s /t 10'), f'Shutting down system in 5 seconds...'
+
+            elif sys_check[-1] == 'restart':
+                return voice(f'Okay, the system will restart in 5 seconds'),\
+                       os.system('shutdown /r /t 10'), f'Restarting system in 5 seconds...'
 
         # splitting the input to make it easier to manage.
         userinput = userinput.split()
