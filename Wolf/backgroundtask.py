@@ -13,12 +13,25 @@ sr = speech_recognition.Recognizer()
 calling = ['woof', 'wolf', 'wolves', 'walf', 'wilf', 'woof woof', 'wolf wolf', 'wall', 'well']
 
 
+# custom exception
+class MicrophoneNotFound(Exception):
+    def __init__(self, error):
+        super().__init__()
+        self.error = error
+
+    def __str__(self):
+        return f'{self.error}'
+
+
 # restore or activate (focus on) the program
 def check_window():
     wolf = pygetwindow.getWindowsWithTitle('Wolf - Assistant')[0]
+
+    # debugging
     print(wolf)
     print(wolf.isActive)
     print(wolf.isMinimized)
+
     if wolf.isMinimized:
         wolf.restore()
     if not wolf.isActive:
@@ -32,7 +45,7 @@ def check_window():
 time.sleep(1.3)
 while True:
     try:
-        # socket.gethostname() gets the pc's name
+        # socket.gethostname() gets the pc name
         with open(f'C:/Wolf/users/{socket.gethostname()}/config.json') as mic_name:
             microphone = eval(mic_name.read())
             microphone = microphone['stylesheet']
@@ -49,7 +62,7 @@ while True:
 
     try:
         with speech_recognition.Microphone() as input:
-            print(f'{random.randint(0,100)} - listening...')
+            print(f'{random.randint(0, 100)} - listening...')
             audio_input = sr.listen(input, 2.5, 2.5)  # input, waiting input timeout, speech timeout
 
             try:
@@ -63,7 +76,7 @@ while True:
 
                         # raises error when it doesn't find the mic button, else click the button
                         if mic_attempt_one == None:
-                            raise FileNotFoundError
+                            raise MicrophoneNotFound("Cannot find mic. Please try again")
                         else:
                             pyautogui.click(mic_attempt_one)
 
