@@ -54,7 +54,7 @@ If someone somehow finds this and wants to clone this repo, Wolf only works on W
 
 If you've met the first requirement (you're using Windows) and have installed the depedencies, please move or copy the 'Wolf'
 folder to the C:/ drive (the C:/ itself, don't put it on any folder). </br>
-> Launch this program by running ```main.py```</br>
+> Launch this program by running ```main.py```
 This program was made on Windows 10 and uses file modifications, 
 so all the files and folders necessary for this program to run is referenced to Windows 10. If you're using an older version,
 feel free to try it. Important note is that I haven't tested this on the older version of Windows, so the program may not work
