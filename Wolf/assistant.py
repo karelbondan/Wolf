@@ -345,6 +345,17 @@ def output(userinput):
                     'None'), f'Sorry, your term did not bring up any calculation result. Please try again.'
 
         elif 'who' in userinput or 'what' in userinput or 'define' in userinput:
+            header = {
+                'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                'accept-encoding': 'gzip, deflate, br',
+                'accept-language': 'en-US,en;q=0.9,id-ID;q=0.8,id;q=0.7,zh-TW;q=0.6,zh-CN;q=0.5,zh;q=0.4,ja-JP;q=0.3,ja;q=0.2',
+                'cookie': 'CGIC=EhQxQzFDSFdMX2VuSUQ5MDJJRDkwMiKHAXRleHQvaHRtbCxhcHBsaWNhdGlvbi94aHRtbCt4bWwsYXBwbGljYXRpb24veG1sO3E9MC45LGltYWdlL2F2aWYsaW1hZ2Uvd2VicCxpbWFnZS9hcG5nLCovKjtxPTAuOCxhcHBsaWNhdGlvbi9zaWduZWQtZXhjaGFuZ2U7dj1iMztxPTAuOQ; CONSENT=YES+ID.en+202004; OGPC=19022270-1:; SEARCH_SAMESITE=CgQIyZEB; SID=5gc_fzvC7ld4U-3DPbiZdOCyYdzIzieEtxU47HYhBYHbDxUwGfvbnETbq05rJeB0Y21Pdw.; __Secure-3PSID=5gc_fzvC7ld4U-3DPbiZdOCyYdzIzieEtxU47HYhBYHbDxUwvXFS3hrMrMTFKqLYDLgzdA.; HSID=A5iUgyphfucSjbKOO; SSID=AQ1BbmPS5Mt8G3EH7; APISID=cZzg5fr40eC8gTq1/AMJKcCib6RsfZ1vKY; SAPISID=Jp7fgDOt3axBtUnp/A3rSfLiBWDVaxFz1j; __Secure-3PAPISID=Jp7fgDOt3axBtUnp/A3rSfLiBWDVaxFz1j; ANID=AHWqTUkY4fCAmJvhTm5bEJTidemDLdOUftNUhygn0309rLQdQmeCibUPCk6wNMRn; OTZ=5802877_28_28__28_; NID=207=Ma74myQrby8mAAAHUVXhlLc84trJBQv5L8wOd9O4GAVAnelqDyNRbK7IV0PHWzgUtZA_hLg_HwJ7SAsBaIHNpVjHV3iKyQ9S-TBqFahYHZFwmdDzG1OIdLBjRkGWgzI2D7h11Tvx1UzCqhB8nVz52iRsOJAzw5E9KC0mNp4kIb6Akwsh3nEbMgx033EqLhc-03_Dfs9Czfy3p8xteb_CHFW80kFmqpIvTfBqHTNALUZFUVqmLpacCa1rOQdiNQV6rpq2Gd-0wRi1MA2p-ENq8OAw9AJqs_BhIARN_ui7ZuBw44QFgUxZ9b-7wjgBDG8d5FBi-eAmP_PGatm52HiigWrhB_FfPLSCDK63AJUrEKp0GdYziWsDR3mV1NsU6B7NDptQUeCm; 1P_JAR=2021-01-14-12; DV=czkrUL6j19dPwGsmhb-xJuUDSX0OcJc3mRwa6ZImqAAAAMBLUjyomhJKagAAAJA7uHL3LJt1HAAAAA; SIDCC=AJi4QfEOlVxJy8NFJF3vlfVuWBt5M5b93oS6ETRZgVUXs8-j8U8jkChuYObW-YplhopLpkBGCw; __Secure-3PSIDCC=AJi4QfE1rAuCEUH4TdOd1ktnYUt-OnEoXhByQz4hTT7RFQtfG-QnTKRQhTEv4SSq4FLxkGT5n38',
+                'referer': 'https://www.google.com/',
+                'sec-fetch-dest': 'document',
+                'sec-fetch-mode': 'navigate',
+                'sec-fetch-site': 'same-origin',
+                'sec-fetch-user': '?1',
+                'upgrade-insecure-requests': '1'}
             try:
                 # i am going to use web-scraping using the BeautifulSoup module in this if statement so it can act as a
                 # quick explanation to the user if they're lazy enough to read on the web.
@@ -370,7 +381,7 @@ def output(userinput):
 
                     # request to google using 'request' module > extract it to a html using beautifulsoup module >
                     # prettify it
-                    google_search = requests.get(f'https://www.google.com/search?q={search}')
+                    google_search = requests.get(f'https://www.google.com/search?q={search}', headers=header)
                     soup = BeautifulSoup(google_search.text, 'html.parser')
                     soup = soup.prettify()
                 else:
@@ -378,7 +389,7 @@ def output(userinput):
                     # the only difference with the above section is that if the user only inputted one keyword,
                     # it will go to this section, otherwise it will go to above section
                     search = userinput[-1]
-                    google_search = requests.get(f'https://www.google.com/search?q={search}')
+                    google_search = requests.get(f'https://www.google.com/search?q={search}', headers=header)
                     soup = BeautifulSoup(google_search.text, 'html.parser')
                     soup = soup.prettify()
 
