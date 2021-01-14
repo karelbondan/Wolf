@@ -21,7 +21,8 @@ their preffered background color, and their profile picture.
 8. Voice commands
 9. User interface
 10. Play video on YouTube & music on YT Music based on user search
-11. Always listen in background, user can call Wolf by using "wake up phrase"
+11. Shut down and restart system
+12. Always listen in background, user can call Wolf by using "wake up phrase"
 
 ### Current state
 
@@ -52,28 +53,11 @@ If someone somehow finds this and wants to clone this repo, Wolf only works on W
 - [App Fonts](https://drive.google.com/file/d/1h_c5Ypzeo20X1mUfyXXnFgzDQKQ82MLE/view?usp=sharing) (Please install all fonts that are in this archive)
 
 If you've met the first requirement (you're using Windows) and have installed the depedencies, please move or copy the 'Wolf'
-folder to the C:/ drive (the C:/ itself, don't put it on any folder). This program was made on Windows 10 and uses file modifications, 
+folder to the C:/ drive (the C:/ itself, don't put it on any folder). </br>
+> Launch this program by running ```main.py```</br>
+This program was made on Windows 10 and uses file modifications, 
 so all the files and folders necessary for this program to run is referenced to Windows 10. If you're using an older version,
 feel free to try it. Important note is that I haven't tested this on the older version of Windows, so the program may not work
 correctly (especially on first launch), you may get blank user profile image on the top right of the GUI and on the user settings
 page.</br>
 > ps. You can always change your profile picture and Wolf will remember your changes.
-
-```
-WIP (ignore) [All done]
-
-- weather icons -> DONE, 29th Dec 2020.
-- usr img on start -> DONE, 29th Dec 2020.
-- save user settings upon exit -> DONE, 30th Dec 2020.
-- threading (if can lol, gave up with the alarm); voice and gui work together -> discarded.
-- open app -> DONE, 31st Dec 2020
-- fix path -> DONE, 29th Dec 2020.
-- make list, note -> list feature discarded (time isn't enough :<), note -> DONE, 31st Dec 2020
-- expand time feature (if can) -> discarded.
-- make the bg color stays the same if ever the user changed the color -> DONE, 30th Dec 2020.
-- make the profile pic and name stays the same if ever the user changes those -> DONE, 29th Dec 2020, 30th Dec 2020.
-- save user's name to a file and open in assistant file -> DONE, 31st Dec 2020
-- ATUR FILE WOI HADEH -> DONE, 31st Dec 2020
-- Differentiate between text input and voice input -> Text input DONE, 31st Dec 2020; Voice input DONE, 1st Jan 2021
-- Add background listening function -> okay yeah, maybe the final final one. -> DONE, 2nd Jan 2021
-```
